@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compiler Design — Complete B.Tech Study Notes | Diverse Loopers</title>
+  <style>
+    :root {
+      --logo: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAYGBgYHBgcICAcKCwoLCg8ODAwODxYQERAREBYiFRkVFRkVIh4kHhweJB42KiYmKjY+NDI0PkxERExfWl98fKcBBgYGBgcGBwgIBwoLCgsKDw4MDA4PFhAREBEQFiIVGRUVGRUiHiQeHB4kHjYqJiYqNj40MjQ+TERETF9aX3x8p//CABEIAPoA+gMBIgACEQEDEQH/xAAvAAEBAQEBAQEAAAAAAAAAAAAABAUDAgEGAQEBAQEAAAAAAAAAAAAAAAAAAgED/9oADAMBAAIQAxAAAAL9UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZhpsP2bLFG0itAAAAAAAAAAABAR3m5LfysqT5wnZmhkZuw8+mkvU6pep1T8i1L6KHLyd0NwAAAAx9jENGZVXRFfmbzooh0CC75LXH5q5Wry7ZXKzuQ+aewzNvPJ/NHYm99vRm7mfcegAAAMbZzDr5p87fSDrds5Wl8hvh4q+cZrm0MyOmtF4tI/M4q5U5RV4uiNCO7NPWljb5l635/bOoAAAMHb94ptMjQPHDpnr0Y/eqhDcOXOkc/nUT/e4TUib5UPHCoSVgAAAAB5ivEVoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/xAAC/9oADAMBAAIAAwAAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwggAAAAAAAAAAATBonEgwAwAQgAAABQA/7UjhwSygQAAABBn1X8xhwSTSCwAAADQiuAACBBADCAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/xAAC/9oADAMBAAIAAwAAABDzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzixDTzzzzzzzzzzzgPK5vTjzDTjzzzzzgS7krzyxzgRDzzzzjjHdICgBDRyxTzzzzjxL0yxyywyyzzzzzyzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/xAAmEQACAQMCBQUBAAAAAAAAAAABAgMABBESUSEwMWBhExQiMjNB/9oACAECAQE/AO0oUV5AGOF4knwKnuQ1ukKRaVBzUcE0gykbMNwKZWUkEEHY81F+PXGaitpJI5WDBihwU/uN6a7uQqKshVVGBp4VK3ubIyv+kbhdW4PNR8DGSPIqOZoXDo5LU5sLg+oZGiY/ZcZFXVxEIhbwg6Acknqx54YBcAce/P/EACQRAAMAAQQBBAMBAAAAAAAAAAECAwQAERIhBRMwMVEUImBh/9oACAEDAQE/AP5Knq8CJTLuelUfZ1PxuRDJa9y/IgAdbA6pkQkQKVRT9E6VlYAqQQfgj3a3fDw4GQHOu5Zv8Gl82JWlHKDNGq9sewDq/hMOdWpxDpTdgx/bSS/D8kYIT6VFJC/RHuzrj1gIZI6U7owG+2srF8Y2M8u6FvggcQupnyuKBNE9ZF6RuWxA+tRxMlcl75bA124hR2FHvpkznBVSe1Ad+R70SSST/d//xABGEAACAQMBBAYFCAYIBwAAAAABAgMABBESBRMhMRQiMkFRcUJhgZGxECMwM0BSU6EGFSQ1Q3I0RGJ0gKLB8EVUY4KEwtH/2gAIAQEAAT8C/wAA5dBzYCgQeR+2y7TZ5DFZx71+9vRFdFnmP7Reux/Di4Chsez/AKVJ/mejsi1HZglQ+KPSptCD6i53wH8OTg1Wm0Yp23bAxyjmjfap5XvpXgjfTAn1snj6hUcMcUOMbuIej4+dTvvFDLHpUcjVokix9c8/kZFbmKvLNZgA54jsTd6n11Y3chdra44TJ/mHj9o2pcPFAEj+slOhfbVpbJEixL2Y/wDM3jV26GREY9Xma6RasU7tPLhQIIyDTOiDLHFdOg9dLJFKDggitoQuF3qfW2/WU+KeFQTLPDHKvJhn5Gv4hPuNMmvGcae6orqGV2QHDjmpGD+ddPh6R0fTJr8NPd41BdRTl1XOpD1lIwRXTE3rx7uUsvPq0m04HjaRUlKrzOjwqXaFvFDHM2rQ4BBA8a6dBvER9SFuzqXGalukjkWPDM5GdK+HjSXkbrKQr5jOGTHWFDalu0O+CymP72mlYMoYciM/RSNvNr5PK3hz7TUshggVfTP+zUNqZBrc8KaxhxwyKDS2snq+NGBriTVr6vw9VdAhx6VSwyWzBlPDxoOJEik9elvbWyDoW5t/wpTjyPyP+/If7sfjW1ere7NdO3vceyv+Pf8Aif8AtVz+zbVt5/QmG7fz7qsusjzfitq9nIflWyDNupgI0KdIPJLcfditsqibL0oOqGQD31OxvbyO1lXdbsiXx148KvYJumJNazIJxHgxt6S1s2dHe4UwbqcHMo559dbF3rbPRDEhjJYE6uPuxSgBQBy7vok/pu1vKP3Yq++uHlRRPnPyo6zbYjPHFRuMbqTl8KVpLaT/AHxo6WYk/dp9JtGHn8atvqJP5lqy/em0v+z4fI9jI150npGGC6QNPdSWi74TOxeQDAJ7vKugv03pW/44040+j4Ve2aXkG6c44g58qK9TSh08OHqq3sJbdGRLo9Zi3ZHM1LsvXaR22/IUczjiTzqexE4iLSkSxnqyDgaNk/SBcJN85o0Nlcg1HZlDNJvfnpMZfHLHgKt9ny28G5jujp4+iM8aghEEMcQ5KoH0RXTta4T8eDh5irpN5Ekq+FQTQsMSc/GtdvHx1D30+i5LaBhh+dQTKpCyjgOXqotbniWHvq5mRurGPbUcWiKNTzZwfdxrZq76S/mycPLgEf2a2JJNNFM8srMRKVHsq6uEtreSZuSirSOa4hWaeVwXGQiHSFFR3MsF90SZtQcZifv8jQuJLy9lhjcpFD22HNj4Ve7+yj6RFIzKvbRjnI9VbUuG/Vy3MErL2cY8DV61zaWi3Mdw5xp1K/EHNbTuZei2c8TuhlZMj+YZqW1fdtpu5g3cc99bakmgto5I5WRtYBxW03uLGJJ4rhj1sFX45q5uHjsZJ1XrCPVioFa4shLDePvSvPORq8MVFq3UernpGfoNqoyiG7QdaBsn+Xvq3kRsaT1HGpPbzFSWUbcVOmhs/wDIoCiASLi4xyNBiLGSLKoLsTnGfwqzjUNvKZXTSTgRZ4z3VNaxS8XUD3UEEMmPERjxU+gAoAfGoFvEBBCMAHgjxCpLWOXXmpbeMHrqDTpFjv8AqrYF7sECMNi2l2Kj2msvWWyVsqMn1UaxmVVaMSLSGtFAV07ORgHh2oB7WXqQFVbqVWqiSjewGSaytpVRmWPUf4qGVaJpARkH1Vj5g8BRDLnFTJIyGNJVOwHNe2Kj4FMcwHqrDLKDxBNRXEcnJW1AeG9pWUoQeIIpZXKsGU4IPMGtqz3WfCl8R/1Ug9YfPSsPxDVtWZVDZRgV1JZcZDKT89TQXErIBEzlQM4HqrLKWK6tptCqPSKy1jRd8A58xjtVxaTWrBJmUpUWqRtFhpY9tg12qqtv1KFD1ZGnrFLaMUh2gkZGNAFSaA2YEHWjUAlJ2mX1YGdN9XhPrCr7JkRSDkeNIQqFuxrO1E2xFa2MKytqLZY/r0qdlZkVmwG3wK0W4ByrTK+G5g9FV7vy5GR3LHqpLMlZTt3QR4miWwvq2kUqpKPCFBo6gSVBB8aysFCDQVHHfUE+qgpJWPJhVLlkbA4k8BQaLUrR2UdqJkzqBQ6Dy6/I07IqFWAwep8+VXJZEUgE74xTtG6hkY5HNS4yyxmBGJzuxzqLVpFDSA7HPLTfyNZbVVRCcuVzTqisGGn10qRREFXuemrCRQsMgAN/VWGcqGiOGU/iKIW4lMEw/wAa2I7QiJ2jkJ/YYNS27n/HkaTVbFXQ22CqmB+prQXDu2eo5r0W3lcsBWz3GCQftRU5kkTM0cQPbbVwrN65B+VaDW3kVPaRSaYkMa0fIqfNWn/Jrdba8w4pHLRJ7aYmvO2YxRqiF2UFJB7aJAYOrYOAc9aqHkJCnJNZG2nqkV36q0bZZ1A4BT2ozqTFbTLI3USmzJAGCRQMrk6kI1IHRViMQoGHOajJA0kV3PjnW9s4+Q1VnaJkYxkdmq5nXUGaRo1Tg2OijjUqeQ+ZpxFGzQo2AwJJHJQK1m0MCyqzKT6qhtQa0LQxhiqj3pQHMtM5yBjBBqzJGN5Vhq8VKiRRlyQDnOBqohXRtwSp4kd6c6tW2cA0VkWMgHj2rMYrLJ1UqyiuZHSmbKvt3WraF5mzHIG2nBXmTRqNXO4OBqRRqNW7FMasTWYCgGSMjGnSTvTy3s01rLLGHXBqDdkFiFqo3GcaGFYWXONIBbmoERkQ7gEHA8aBOlVJUFxg9nI9tWmOk+tOdEiGzRiqJCgHIcqhJK46QMdqYuXO7QQPSctWMCMEYBq3nkEjA6vxVQ5WMiudQXNRtGWHOqEgAdKhY2JBIBPaqzF40lKhj0UkjKABjua0e0Rkioy2T8qyyWxdlOG8q0NxHHI22BO4CaBJUv66cFCjPPY0CRQJ34e1A44g4xzVXAAB36K2rBWCtqVhx7ZqXIwMkc6gLKXVhjt5VM4bUyqAPpFHjJAO1KjByUGMVrBRxCk9AeVWHJQdXSqIbKn7AdsGo8jJaS2wccqsOC7xr2OTk0iyg7wjUeBqySwcGN0Yca2ZrPiVPJRjFaqB0RGHqFI7qzIp+tgaqULsMqQDxoHDKFCggjXjVpNnU6McdlRwq6OGwrrkGqm2Ds3wRVlG4yQM0JO0SozZ9VaWOB3DKT1rM4MZxTuViTsQAT5q1hJ2I3B3qRIqM6FEByBjk1UalHUMO+BzNXbRy4CnYhQ/wBiaq5b2EeAFZVODjT5VhQQpDsBw3qNPYirO0FkVLjCydPdxVXKSoE8R7UojY4wnirLIaRQdJ2U7Vj7V3Hj3q3Q9e0Lh3lFCTLEIcZKAE8aNkCkkRqT3UYq5jJNNGCAFULjFNDIVqJbVllH4DJFV+2M8qdW32xWg8cjNF1y9Vc7u4GKAibGCpbJoyAMZgNs8M03dU6hCcHXFMzNlRknkaFI0jaMtgc6Y6VVCCM+ynaJiT6sUqzGVlVQFGBzqIZjOPGh4KY9qIclhtwSSMGrHCoSjE+2hRIJ3UsMedWijQGMEMPWKQaWwKR3Zs+QYrKNb4MeTXiA3HdOT2qR1kVmHTqB7a0Vo0ZqAijDZHRVzjFIUmEbK2eo8q1+sRAD1ZrOmwJ2I1qMCPEZeVQMqTNKFILe2iqsm0rLnupGwKYLiJWTOlJqDHxMaMhBIJyDyNXZ2AUxjBnRTxrMomGQ6b57CosrDIJANbS3ZST2oR9YJPiMJEwI7GiwQ6fXVuJ48nOaRlcPqUlRkdlBVWLMSanMhRKpyPCq3gJzVlNLQnVtQBNBm2q58nGa8IKf8AI4VdnPlrJBxqGm+RQkMvbNMJJ2V3KA7j0asNIPjUgagNw6jVhLGjCZ2OOmmmVWIBIONqc5HfgqiHmST5VmRdOSxG3HerNJIGzGGC8M96UNHJuUwBWlyxwrYqPYHI5VG4lVSCWyO1TiJvEigkYq6lhByrYq5YxsMEA+qpiJG7g5qJAzbsVqdVGN2Bk0OFXkgA7b1MxRCVUnPfpohSqBSDjPbLDG1Ia1Jd1TcA4o9NTH7qucKaJy2kc6i4QM5wKbCkHBqCSSVABGck4pAZIdJYHGCTnI7VXR5EVWUHJpgfCbFMqFCqGU8AWPWKQ7QLknXpU7yQAHzHJqIpvQOqPRWoHIHBDcRzJrNNaESmJAVJ44HbFJG0YU7ZA7UNwGPDHbNBQi5HCj58XQr+NeqlXx7VHJm1tYGsKPIVQqBhcEVaGcN0qA/YisJ2YLx6qlbBUhfEOBzRGjSuduIqJyHDalCgHhVXZlAOCc0FZm11HUCMUE9VHAoBjjqy0d9ypVCMmcgjiqsMAbBpWJLc97VtMfNxqhZwsgxx4iqFpGQqHDBz0Upj3Kxq5XBKgdmq1HI0dioJ8KBUb+tqrEyuroxBJJANQqrTkRJJqoWRGBHoq+u7YKBkjvWerHqy0U+JYcNNaqkKfE3RJUDB7URBGxiHDI4ZNBPHp9FLK6ULvuoXdlDXQYmRiSD2pBHkLqXcqMHPepWFwONP/ABLSRO20OkKCMnkOWKlKTIJFPEHtThVXOkadqSIJQxOBjiKi+dEDdCT2qaNYkVlByNsEcaWQSkYD5INbk8RWaFGKLnI6DVjHKgUHOSMnXzriUKFZiAD30mVjJr3MijXXA1VCEBCsPPTgKQR3Aqk8qbGh9DqPpVqiYOoYHAz2FKyHxMtJ3AAHKlbcuTnHbFQaOeajHB91VnjzupBqBpI5QIzk4oOBkzOB1ZqoGVlcqWX3b0q7C6IIHbWpIvJ4GKQ9GGzVjHKig4x7RxFQyqHdcDGe4rLHjcj0kZqJVkZkXlqCOmidyCFLAe0V42GTiigFc6s4xxGdqq3iquK2g7DJNTJuPamdCFIGATzxSLHCqKxA7cqAK01wrlQfg8qBhBAJB1HEVqGpSYqCBJ5UkjLHOkYz0ADQM8h0gg4G3WrlknAAAKADX7OlVyYBJ3wNelSyF2tVx6qa3kDAHBB5VdXrQoxXG3bBrl00O9FhgAUzgRtHpFHxNE9IqkNtORkEVKFEgJHFRx49BqMpCG4iqniWTb8LHI3NSbEbMAe1AGiuF7HUeijqWIdvbV2V0hDADtmjJKxRD1Z5cq0pDRs3YevfNdLMxJJTI6aiKZxOo+0MOHFgakTGflI79lLJIFJLqV7YZPI0A5C7sn0U5ijljUgcWG4FNEUMhz4gBzqQ7IqodQAJYUrROSOlCQO/aqXtCd96ZNxbJNXRJcBTjJFNnCgdMDJoIFQFmPEig4JiLHHkiqmMpGHBVBTLFICNxzHfFVB2yIwBg8+JpVDtnbIA8KQySRFGB5cO9RJuEoB2GaKgYzniMioFkUSKCN20VQdREVZM+3esSqR1Z8cjkVBEUBAoLkIZWAGMZ9lRFiJCAEBzuMjNbfxBtGMH0kmi6yRxyqRtiqFTgb44nPWqMMqYzjArtRQI5KDmN6lUNhTgFjWV2eMnfzU+inWRonBIcpFVHqNNGe3AGKiZHILFG5Vyg9ZqNpVYMFOcDxc6tjJBY7AiqphkSJN8E6M0SKvYsTgCkjDI2N+HNRMR2JbXzqBiIVYNkr1GqxNJLhSdo+eKxHJaIAnHao5mkjMQB5E5JoMqq8hK4UfXVg0UhbgxwfUaqJEfYSuBgD3Ug7bVnV1EZDDJHpyO+KcWoVsY+RV4oJJIlI8pxmq5FJABJHzVbJWAZEHPrNVZJmVnBJGnP4avjBDKo2yTk+VCOJlYFhvjFavbIYiIUXgKkYkN4s+VQyTMgL8gBTspVXII/DiKj3hBwDg9pqzLFGQQMcMGg7RoqBBjvUsitIWCOG4YrKqBSi6iAMCmjKgFcE56M5oByT5VqhvkWy3WxWibS6F0BPkNakWXAJOEHLTFQHBAcjFBguVJIPQ0L4DgAZb8qA1kAds42qKQoxUA6z60AkHRnKkDgKjXbOSMnGNNPIVVHJI9aIJGMjFBiclW8R6asLmNpVKFiAfRgHNOkijBOSAOWaRyMAnHOqFrSKrqApOSeVWI3dSMkDpodgMEY57V5BpUqeQqPJ5xtVqkWaWi7Yoa6SqAijkKBR9oNX3jFAZJAORToAwcnPTWUFSCD6KnQQIzF8AHNKFQA+quPyqBWVXJ3Jx2GjuxKkE4oJIh+0nzJpIlSJiAQCT/GkGp1VRk9RWJG2VkT7QKs9oYLqRy5GocAUshJjWMZpFjXcAHnWJZlAI8x/GptQ4nVk9sDNEJl3wBjoFR7SgA8BnbFNqjcANnGCDVu+YFyTgk0TnAVSaUIpUuPm4VZEhjGMHGM46atS7FGz0nFVjfB2YE+yqxHnSN80n4TRIrKVIB9deIqDkfWKaW3JYfPGpVhSMjGKQ7F2LDUNiVG5xSKOoDtnvWc6E4GxFRYBPMoOWKnhQE5aM6ckGmkMkykGNSMjnzqVXLEBW2Nba3LaxIKqD7akqAWAAPPJqzjzqQrFCTnBH2SGKFAW8IPkOahFuVjVxhR60rKPMCeIBpQxjMkjbcQO3bFNqz8MduWaiLk6tI574ozCwRmHPkB0mrGNgMKRgcKZi4ORwHr6K1kkMSMw1A1gZ25gUmzA9YzqNMW/lqUK2QI9gDU6xYKgZqMpZsEYAqaBJlD8iSSeNMy6l0YBHXO3lTL+A3TmuYvJiVyvYjk0VZN1PpHDJ61hllIyEGdh3qiRuFcpkdqsXzqIcqvU1JEiAoAeVSxtGo7kZqyuuWUDJBPSqjKKvJRRFJU9Wp2dVHWMjyqdOg45q6k4OQQBzqy4DEtg8aHhfAJxV5bAjXAbbgPGrN1lSMFhjHfrpRMUdWbOfgDiKnJEoYcSKeRiikdJPSm+yAQO2ajEhbaQx7E1oFJAJHzXFhJVH2k8e9VCxSSn3IxijGY0f0qabYkA8hU5kZSMFqe3JGc6cZFR7hR6KYhEcQh4ntWoVHJOcjJpGRmJAY4zTYhQfmCqvCSQSBnj0Co3cFRzI5AVcmRRgYX0edFBhRk5J45FZGjkXIJGarNbMjY2HoNWsikFcAMPz6atIQR5qkSSRY02AIziqgsSVAwOnJoBFXc9zGlIyJChAHDZRiqiHkMLtxxz6qmT1YDAA4ViEOB9pBHbzFBPDJkHnuK1K43EigjbbIqLUm7CJfWasAJwzHkAMg1csSqFQcB0Vb6sAkELzUY21g4GKkQ72VLZGNQeqNGRsR5VBICTuCMdO9X2xGUHiPWamPaTFewJ41BBJB5VCZFZNx6KeFQgqzDDk4HWrFihiIG3rqExNqPMHHYVJFFjKknIBzuPGrSBhCMEnlx7cK0Y0NkE+sUM3hQAZ7HNLkjUDkYqVBJhFON+Zqy/RHFhAMBQcHaqoFMeCAO2KaFmEioT4BwobKncDnxqPb6x2ORS3DFiWiQB8E4AHIVMiJnLYPqzUUpC6ipwO5BOO1VRUkVBkAZ1UtmjKqSSAdXM+WrNmxSNhzBFAb4kh9EYJx0mmCN1kYj1kVfHoHijYGikQtGQ3hPMHi+RSmjdnHoJFRISCFUBh2pS0aFSMEkEdlRRgBQfPJKTJnmGHHtiomZ4lJXHA80W2KAchUbyLudvBSSSKKSKGi0jI9OKkCuegHArlHJCt0ipHTqBGKkYZwNJ4HtTxKpJU8N6SRwmVVS3oG1bCcYNakJX1kCo3IKkDGak+sMFxnHHFVZVOdB2Ocae6oFM8jEHbiq8l0kLEKpI51qDuHBHuqBjkDZyKZURiSzDPDGOJq5kJjA3wM0WlJwW8KADiop22wQcjhk81pQVMYJBqIXJRi5yCfCajCqVfA69lTiQM2BzINZhIA+KuZ1t0K7c8VCUVpEbOQcitNjZScnGKcqxKjl3Y+dHaU7BgBj3oMhUnIHQnxCsiowAYDlj3VVFVipJzz6KgSZXO2SOiqu3NbTlJopJFCggIgA4mqsyqWJ1AECj2qrMLSq2TljkDrqnM8CIBkBqr11ZPYitIYTtSXBBG4xWIVMO25qpkhfHIZPLODVJIJQDjCk4GMjI7VJMFQLqJB4EDOKrFGFxnJAHpzWJjOkbLzPvr5ECNTRkpIBkOadcncJzqJHbYEBh1Gt+xjYDnWQ8aAFORnqq+FxEuOZ41JJuUhBjvioSWHCgSKIDHdNqvD4iBzVrGxkCLkAcupqpRULgr0YrMBgnJ5mnZ0Kpk4APWqVYjsQRxqLMVIVNiM89zWopD5EYI7Z91RSk5BB3w3bFVkZFCjKhO4wKVNiAdhj8NRgwoyBkA/UKjUsVzzFJEzKxC+q5qJGBKscg9gKSORkbc5I71JCrFmJJz2qJVMCdxjoNOHd3CkgkDiM1FtGCiD0HI81StOxClT0HOQU0j4xj3VOkJMYEhIG5JFJJhFIPqpxEFjlkU9PBaqFzpkgZqLJdgcDkKkjRhtg7HFVrTJlOMHHJhrAYYXCEZqMSRRsM59lOsWFAUnGBgHNTFl2KADkHJPWpiMrHIADjIAFUK5AJXIzjrpJWRMocnhk1KmHV1GzA7GuRFJyeCcOeKaHzFUQ8jknpqsOHQMOG2aIjEkWON8qcOGGfNzBrSmI6c7jJ51LvV9xq9hs0DBAADZ4niKABVE7ZPU1UEFGO3KqvBrBBb+vkq5oLpJGcVqOYkOeGkH1ipoyASDkAA8qmABGOGO5oEYUMDz3qzF0OBkjnVyoQEgDxAdqqsihQM4GekCrDVjJxzqs7vk4GAc9BpF0NkGpZNu25HvqY7Dc4JziiyxBIBG3KrWEkQ8X7oPKpSpCKcAZBoNGqqSOGKlMasV5YPoq0TByxIP4lLBizMCcn8a0kwiyQBk5x7akeMqq/3bqr6eH4kJIzk56s/9oADAMBAAIAAwAAACHzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/8QAJhEAAgIBBAICAgMAAAAAAAAAAQIAAxEEEiExBSAwMkETFFH/2gAIAQIBAT8A7UoVnYKgyT4E9RWt09YJy3w3f5/kfBUWXDl2TxJb9ZiXKjLDdO4mFaOj1EBHEgXlaBuR5gUl6bJCuN9bS6l7HCj5Mm5gFFgYNnYYlzVPkjBiK+GKqA89Q0j8XH2u27eJgIzA/PpzDqiE8iZVlTqN1Pb3EcVWjIDjFEYJ5MduP1uG9IVe/LFWkMmIBiWEqcMdxLmU4PJxLJ4g1EHMuoVPJxHa/gTkSR+L6THVoNuCmLn2hVmPiIikZh0yVWwMy/WnOKiS8UYxKhXsP7bnAJkysO5tTIJW3Yb8KfGKAZVBQMVHTkXQy2fA8SfTyuJlhAn8hLtOsE5Msf8ypiGZYNhJy0Ry4OZXUfABEuqNjMT/8QAJhEAAgIBBAICAgMAAAAAAAAAAQIAAxEEEiExMGAFQEEUI1H/2gAIAQMBAT8A6VBX7AUAD5bsxPiAIqsX1gCJlbqMsRdI5MRkrTtgWYiXVXYMnIg1uXHDnCfk/O0e1oKcDPJGJZSoMsKTjUX0aDAm0j+k7a/JyJLs4V+VYA42mGq/CkmbJNbiEalCo7YhqVHCjAiOMiJjniRVKRDYqGUHItrtWFm0iy8uQD2mJi4APaZahVH+zNi2EANOJr2NkYEtQqoGBl2yjbGAGLBIJmv4fQjjnEupj8CRLqwwJcbjON0MQb/4KHM3+JGi2C9N2oJfijJiUVZ6nzHOFBJMv1bkDBwNOHQmbtWCj8xmKQRCMjsJfbz7Z8wIZGIiVDJkS8bZQ4Gm2YuoZwN/XQAJxKqNOc+JJQJ3CIFJq8CIFOGAlrJyQzTtjTjnP/Z");
+      --primary: #1d3a5f;
+      --primary-dark: #142d4c;
+      --primary-soft: #e8f0fb;
+      --accent: #c8a840;
+      --slate: #1f2933;
+      --muted: #52606d;
+      --border: #d9e2ec;
+      --bg: #f4f7fb;
+      --white: #ffffff;
+      --code-bg: #111827;
+      --code-border: #263244;
+      --code-text: #e5e7eb;
+      --blue-soft: #edf4ff;
+      --blue-border: #bcd4ff;
+      --warn: #fff7d6;
+      --warn-border: #f2c94c;
+      --exam-bg: #fff3f3;
+      --exam-border: #f87171;
+      --revision-bg: #f0fdf4;
+      --revision-border: #4ade80;
+      --insight-bg: #eff9ff;
+      --insight-border: #60c5f8;
+      --memory-bg: #fefce8;
+      --memory-border: #facc15;
+      --shadow: 0 12px 30px rgba(31, 41, 51, 0.08);
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--slate);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .logo {
+      width: 64px; height: 64px; flex: 0 0 auto;
+      background: var(--logo) center / contain no-repeat var(--white);
+      border: 1px solid var(--border); border-radius: 8px;
+    }
+    .site-header {
+      position: sticky; top: 0; z-index: 30;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .site-header-inner {
+      max-width: 1440px; margin: 0 auto;
+      padding: 12px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .brand, .topic-brand-left, .print-brand { display: flex; align-items: center; gap: 14px; }
+    .brand-title { margin: 0; color: var(--slate); font-size: 1.16rem; font-weight: 850; line-height: 1.15; }
+    .brand-subtitle { margin: 3px 0 0; color: var(--muted); font-size: 0.9rem; }
+    .header-badge {
+      color: var(--primary); background: var(--primary-soft);
+      border: 1px solid #bed3f5; border-radius: 999px;
+      padding: 7px 11px; font-size: 0.86rem; font-weight: 750; white-space: nowrap;
+    }
+    .page-shell {
+      max-width: 1440px; margin: 0 auto;
+      display: grid; grid-template-columns: 320px minmax(0, 1fr);
+      gap: 28px; padding: 24px;
+    }
+    .toc {
+      position: sticky; top: 92px; align-self: start;
+      height: calc(100vh - 116px); overflow: auto;
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px;
+    }
+    .toc h2 { margin: 0 0 12px; color: var(--slate); font-size: 0.92rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .toc-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    .toc-list a {
+      display: block; padding: 10px 12px;
+      border: 1px solid transparent; border-radius: 6px;
+      color: var(--muted); background: #fbfdff;
+      font-size: 0.94rem; line-height: 1.35;
+    }
+    .toc-list a:hover, .toc-list a:focus {
+      color: var(--primary-dark); background: var(--primary-soft);
+      border-color: #bed3f5; outline: none;
+    }
+    .main-content { min-width: 0; max-width: 1120px; }
+    .course-hero, section.topic {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .course-hero {
+      padding: 30px; margin-bottom: 24px;
+      border-left: 6px solid var(--primary);
+    }
+    .course-hero h1 { margin: 0 0 10px; color: var(--slate); font-size: clamp(2rem, 4vw, 3.35rem); line-height: 1.08; }
+    .course-hero p { margin: 0; max-width: 900px; color: var(--muted); font-size: 1.05rem; }
+    article { display: grid; gap: 24px; }
+    section.topic { scroll-margin-top: 104px; padding: 28px; }
+    .topic-brand {
+      display: flex; justify-content: space-between;
+      gap: 18px; align-items: center;
+      padding-bottom: 16px; margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .topic-kicker { margin: 0; color: var(--primary); font-size: 0.8rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.08em; }
+    .topic-note-title { margin: 2px 0 0; color: var(--muted); font-size: 0.92rem; }
+    .unit-header {
+      background: var(--primary); color: white;
+      border-radius: 8px; padding: 22px 28px;
+      margin-bottom: 22px; text-align: center;
+    }
+    .unit-header .unit-label { color: var(--accent); font-size: 1.1rem; font-weight: 800; letter-spacing: 0.06em; margin: 0 0 4px; }
+    .unit-header h2 { margin: 0 0 6px; color: #fff; font-size: 1.9rem; }
+    .unit-header .unit-topics { color: rgba(255,255,255,0.75); font-style: italic; font-size: 0.95rem; margin: 0; }
+    h2 { margin: 0 0 12px; color: var(--primary); font-size: 1.9rem; line-height: 1.22; }
+    h3 { margin: 28px 0 10px; color: var(--primary-dark); font-size: 1.35rem; line-height: 1.25; }
+    h4 { margin: 22px 0 8px; color: var(--slate); font-size: 1.08rem; }
+    p { margin: 0 0 12px; }
+    ul, ol { padding-left: 22px; }
+    li + li { margin-top: 5px; }
+    .lead { color: var(--muted); font-size: 1.05rem; margin-top: 0; }
+    .concept-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin: 18px 0; }
+    .concept-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; background: #fbfdff; }
+    .concept-card h4 { margin-top: 0; }
+    .note, .formula-box, .proof-box, .warning, .question-box, .exam-box, .revision-box, .insight-box, .memory-box {
+      margin: 18px 0; padding: 14px 16px; border-radius: 6px;
+    }
+    .note { border-left: 4px solid var(--primary); background: var(--primary-soft); }
+    .formula-box { border-left: 4px solid var(--primary-dark); background: #f5f9ff; border-top: 1px solid #bed3f5; border-right: 1px solid #bed3f5; border-bottom: 1px solid #bed3f5; }
+    .proof-box { border-left: 4px solid #2563eb; background: var(--blue-soft); border-top: 1px solid var(--blue-border); border-right: 1px solid var(--blue-border); border-bottom: 1px solid var(--blue-border); }
+    .warning { border-left: 4px solid var(--warn-border); background: var(--warn); }
+    .exam-box { border-left: 4px solid var(--exam-border); background: var(--exam-bg); border-top: 1px solid #fecaca; border-right: 1px solid #fecaca; border-bottom: 1px solid #fecaca; }
+    .revision-box { border-left: 4px solid #22c55e; background: var(--revision-bg); border-top: 1px solid #bbf7d0; border-right: 1px solid #bbf7d0; border-bottom: 1px solid #bbf7d0; }
+    .insight-box { border-left: 4px solid #0ea5e9; background: var(--insight-bg); border-top: 1px solid #bae6fd; border-right: 1px solid #bae6fd; border-bottom: 1px solid #bae6fd; }
+    .memory-box { border-left: 4px solid #eab308; background: var(--memory-bg); border-top: 1px solid #fef08a; border-right: 1px solid #fef08a; border-bottom: 1px solid #fef08a; }
+    .question-box { border-left: 4px solid #7c3aed; background: #f5f3ff; border-top: 1px solid #ddd6fe; border-right: 1px solid #ddd6fe; border-bottom: 1px solid #ddd6fe; }
+    .box-label { display: inline-block; margin-bottom: 6px; color: var(--slate); font-weight: 850; }
+    .exam-label { color: #b91c1c; font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
+    .revision-label { color: #15803d; font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); font-size: 0.95rem; }
+    th, td { padding: 12px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+    th { background: var(--primary); color: #fff; font-weight: 800; }
+    tr:last-child td { border-bottom: 0; }
+    tr:nth-child(even) td { background: #f8fafd; }
+    pre {
+      margin: 16px 0; padding: 16px; overflow: auto;
+      color: var(--code-text); background: var(--code-bg);
+      border: 1px solid var(--code-border); border-radius: var(--radius);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    code { font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace; font-size: 0.92rem; }
+    :not(pre) > code { background: var(--primary-soft); color: var(--primary); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    .diagram { margin: 18px 0; padding: 16px; overflow-x: auto; background: #fbfdff; border: 1px solid var(--border); border-radius: var(--radius); }
+    .flow-row { display: flex; align-items: center; gap: 10px; min-width: max-content; flex-wrap: wrap; }
+    .flow-box { min-width: 120px; padding: 10px 14px; text-align: center; font-weight: 800; background: var(--white); border: 2px solid var(--primary); border-radius: 6px; font-size: 0.9rem; }
+    .flow-arrow { color: var(--primary-dark); font-weight: 900; font-size: 1.2rem; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .pill { border: 1px solid #bed3f5; background: var(--primary-soft); color: var(--primary); border-radius: 999px; padding: 5px 10px; font-size: 0.88rem; font-weight: 800; }
+    .site-footer { max-width: 1440px; margin: 0 auto; padding: 22px 24px 34px; color: var(--muted); font-size: 0.9rem; }
+    .print-brand { display: none; }
+    @media (max-width: 980px) {
+      .site-header { position: relative; }
+      .site-header-inner { align-items: flex-start; flex-direction: column; }
+      .page-shell { grid-template-columns: 1fr; padding: 16px; }
+      .toc { position: relative; top: auto; height: auto; }
+      .toc-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 700px) {
+      .toc-list, .concept-grid { grid-template-columns: 1fr; }
+      .course-hero, section.topic { padding: 20px; }
+      .topic-brand { align-items: flex-start; flex-direction: column; }
+      th, td { padding: 10px; }
+    }
+    @media print {
+      @page { margin: 22mm 12mm 16mm; }
+      body { background: var(--white); }
+      .site-header, .toc { display: none; }
+      .print-brand { display: flex; position: fixed; top: 0; left: 0; right: 0; height: 17mm; background: #fff; border-bottom: 1px solid #ccc; z-index: 100; font-size: 10pt; font-weight: 800; color: var(--slate); }
+      .print-brand .logo { width: 40px; height: 40px; }
+      .page-shell { display: block; padding: 0; }
+      .course-hero, section.topic { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-brand">
+    <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+    <span>Diverse Loopers — Compiler Design Complete B.Tech Study Notes</span>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand">
+        <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+        <div>
+          <p class="brand-title">Compiler Design — Complete Notes</p>
+          <p class="brand-subtitle">Diverse Loopers B.Tech Crash Course</p>
+        </div>
+      </div>
+      <div class="header-badge">8 Units • All Phases • Exam-Ready</div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <aside class="toc" aria-label="Table of contents">
+      <nav>
+        <h2>Table of Contents</h2>
+        <ol class="toc-list">
+          <li><a href="#unit-1">Unit 1: Introduction to Compilers</a></li>
+          <li><a href="#unit-2">Unit 2: Lexical Analysis</a></li>
+          <li><a href="#unit-3">Unit 3: Syntax Analysis (Parsing)</a></li>
+          <li><a href="#unit-4">Unit 4: Syntax-Directed Translation</a></li>
+          <li><a href="#unit-5">Unit 5: Semantic Analysis &amp; IR</a></li>
+          <li><a href="#unit-6">Unit 6: Runtime Environments</a></li>
+          <li><a href="#unit-7">Unit 7: Code Optimisation</a></li>
+          <li><a href="#unit-8">Unit 8: Code Generation</a></li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="course-hero">
+        <h1>■ COMPILER DESIGN</h1>
+        <p>Complete Study Notes — Course: B.Tech &nbsp;│&nbsp; 8 Units &nbsp;│&nbsp; Complete Syllabus Coverage<br>
+        <em>Covering all topics in detail • Exam-Ready • University Level</em></p>
+      </header>
+
+      <article>
+
+        <!-- ═══════════════════════════════════════════════════ UNIT 1 -->
+        <section id="unit-1" class="topic">
+          <div class="topic-brand">
+            <div class="topic-brand-left">
+              <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+              <div>
+                <p class="topic-kicker">Diverse Loopers Crash Course Notes</p>
+                <p class="topic-note-title">Unit 1 revision sheet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-header">
+            <p class="unit-label">UNIT 1</p>
+            <h2>Introduction to Compilers</h2>
+            <p class="unit-topics">Definition • Phases • Compiler vs Interpreter • Language Processors • Structure</p>
+          </div>
+
+          <h3>1.1 Introduction</h3>
+          <p>A compiler is a special program that translates a program written in one language (the source language) into an equivalent program in another language (the target language), usually machine code or assembly. The translation process is called compilation, and the software tool performing it is the compiler.</p>
+
+          <div class="note">
+            <span class="box-label">📌 Compiler:</span>
+            <p style="margin:0">A program that reads a program written in one language — the <em>source language</em> — and translates it into an equivalent program in another language — the <em>target language</em>. <em>(Aho, Lam, Sethi, Ullman — Dragon Book)</em></p>
+          </div>
+          <div class="note">
+            <span class="box-label">📌 Source Language:</span>
+            <p style="margin:0">The high-level programming language in which the original program is written (e.g., C, C++, Java, Python).</p>
+          </div>
+          <div class="note">
+            <span class="box-label">📌 Target Language:</span>
+            <p style="margin:0">The low-level language (usually machine code or assembly) into which the source program is translated.</p>
+          </div>
+
+          <h3>1.2 Language Processors</h3>
+          <p>Programs written in high-level languages must be translated before execution. Different tools accomplish this translation in different ways:</p>
+          <table>
+            <thead><tr><th>Tool</th><th>Description</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Compiler</td><td>Translates entire source code to target code before execution; fast execution</td><td>GCC (C), javac (Java), g++ (C++)</td></tr>
+              <tr><td>Interpreter</td><td>Translates and executes source code line-by-line; no separate object file</td><td>Python, Ruby, BASIC interpreters</td></tr>
+              <tr><td>Assembler</td><td>Translates assembly language to machine code</td><td>NASM, MASM, GAS</td></tr>
+              <tr><td>Linker</td><td>Combines multiple object files into one executable</td><td>GNU ld, Microsoft LINK</td></tr>
+              <tr><td>Loader</td><td>Loads executable from disk into main memory for execution</td><td>OS-level program loader</td></tr>
+              <tr><td>Preprocessor</td><td>Performs macro substitution, file inclusion before compilation</td><td>C Preprocessor (cpp)</td></tr>
+              <tr><td>Cross Compiler</td><td>Compiles code for a different target platform than the host</td><td>ARM cross-compiler on x86 PC</td></tr>
+            </tbody>
+          </table>
+
+          <h3>1.3 Compiler vs Interpreter</h3>
+          <table>
+            <thead><tr><th>Feature</th><th>Compiler</th><th>Interpreter</th></tr></thead>
+            <tbody>
+              <tr><td>Translation</td><td>Entire program at once</td><td>Line by line</td></tr>
+              <tr><td>Execution Speed</td><td>Faster — machine code runs directly</td><td>Slower — translates at runtime</td></tr>
+              <tr><td>Error Detection</td><td>All errors after full analysis</td><td>Stops at first error encountered</td></tr>
+              <tr><td>Output</td><td>Separate object/machine code file</td><td>No separate output file</td></tr>
+              <tr><td>Memory</td><td>More memory for object code</td><td>Less memory — no object file stored</td></tr>
+              <tr><td>Platform</td><td>Platform-specific object code</td><td>Platform-independent if interpreter present</td></tr>
+              <tr><td>Examples</td><td>C, C++, FORTRAN, COBOL</td><td>Python, Ruby, JavaScript (traditional)</td></tr>
+              <tr><td>Debugging</td><td>Harder (indirect)</td><td>Easier (interactive)</td></tr>
+            </tbody>
+          </table>
+          <div class="memory-box">
+            <span class="box-label">🧠 MEMORY TRICK:</span>
+            <p style="margin:0">'CIA' — <strong>C</strong>ompiler = <strong>I</strong>nstant execution after <strong>A</strong>ll translation. <strong>I</strong>nterpreter = <strong>I</strong>mmediate line translation.</p>
+          </div>
+
+          <h3>1.4 Phases of a Compiler</h3>
+          <p>A compiler operates in a series of phases. Each phase transforms the source program from one representation to another. The phases are broadly grouped into the <strong>Front End</strong> (machine-independent, source analysis) and <strong>Back End</strong> (machine-dependent, target synthesis).</p>
+          <table>
+            <thead><tr><th>Phase</th><th>Group</th><th>Input</th><th>Output</th></tr></thead>
+            <tbody>
+              <tr><td>1. Lexical Analysis</td><td>Front End</td><td>Character stream (source code)</td><td>Token stream</td></tr>
+              <tr><td>2. Syntax Analysis</td><td>Front End</td><td>Token stream</td><td>Parse tree / Syntax tree</td></tr>
+              <tr><td>3. Semantic Analysis</td><td>Front End</td><td>Parse tree</td><td>Annotated / attributed tree</td></tr>
+              <tr><td>4. Intermediate Code Generation</td><td>Middle</td><td>Attributed tree</td><td>Intermediate representation (IR)</td></tr>
+              <tr><td>5. Code Optimization</td><td>Middle</td><td>IR</td><td>Optimized IR</td></tr>
+              <tr><td>6. Code Generation</td><td>Back End</td><td>Optimized IR</td><td>Target machine code</td></tr>
+              <tr><td>7. Symbol Table Manager</td><td>Support</td><td>All phases</td><td>Symbol table (cross-phase)</td></tr>
+              <tr><td>8. Error Handler</td><td>Support</td><td>All phases</td><td>Error messages</td></tr>
+            </tbody>
+          </table>
+
+          <h4>1.4.1 Detailed Phase-by-Phase Analysis</h4>
+          <p>Consider the following C assignment statement being compiled:</p>
+          <div class="insight-box">
+            <span class="box-label">💡 Running Example:</span> <code>position = initial + rate * 60</code>
+          </div>
+          <table>
+            <thead><tr><th>Phase</th><th>Processing</th><th>Output for 'position = initial + rate * 60'</th></tr></thead>
+            <tbody>
+              <tr><td>Lexical Analysis</td><td>Groups characters into tokens (lexemes)</td><td><code>&lt;id,1&gt; &lt;=&gt; &lt;id,2&gt; &lt;+&gt; &lt;id,3&gt; &lt;*&gt; &lt;60&gt;</code></td></tr>
+              <tr><td>Syntax Analysis</td><td>Checks token sequence against grammar rules</td><td>Abstract Syntax Tree (AST)</td></tr>
+              <tr><td>Semantic Analysis</td><td>Checks type compatibility; inserts type conversions</td><td>inttoFloat(60) added; type annotations on AST</td></tr>
+              <tr><td>IR Generation</td><td>Produces intermediate (platform-independent) code</td><td><code>t1=inttoFloat(60); t2=id3*t1; t3=id2+t2; id1=t3</code></td></tr>
+              <tr><td>Code Optimization</td><td>Improves IR for speed/size without changing meaning</td><td><code>t1=id3*60.0; id1=id2+t1</code></td></tr>
+              <tr><td>Code Generation</td><td>Maps IR to actual machine instructions with registers</td><td><code>LDF R2,id3 / MULF R2,R2,#60.0 / LDF R1,id2 / ADDF R1,R1,R2 / STF id1,R1</code></td></tr>
+            </tbody>
+          </table>
+
+          <h3>1.5 Symbol Table</h3>
+          <p>The Symbol Table is a data structure maintained throughout compilation that stores information about identifiers (variable names, function names, class names, etc.).</p>
+          <table>
+            <thead><tr><th>Attribute Stored</th><th>Description</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Name (Lexeme)</td><td>The actual identifier string</td><td>position, rate, initial</td></tr>
+              <tr><td>Type</td><td>Data type of the identifier</td><td>int, float, char, pointer</td></tr>
+              <tr><td>Scope</td><td>Where the identifier is visible</td><td>global, local, function-level</td></tr>
+              <tr><td>Memory Location</td><td>Address or offset in memory</td><td>offset 0x0004 in stack frame</td></tr>
+              <tr><td>Number of Arguments</td><td>For functions: parameter count</td><td>add(int, int) → 2 arguments</td></tr>
+              <tr><td>Return Type</td><td>For functions: return value type</td><td>int, void, float</td></tr>
+              <tr><td>Line Number</td><td>Line where declared (for error reporting)</td><td>Line 12 in source file</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Key Insight:</span>
+            <p style="margin:0">The Symbol Table is <strong>NOT</strong> a compiler phase — it is a <em>shared data structure</em> used by ALL phases. It is queried during lexical analysis, updated during semantic analysis, and used during code generation.</p>
+          </div>
+
+          <h3>1.6 Error Handling in Compilation</h3>
+          <table>
+            <thead><tr><th>Phase</th><th>Error Type</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Lexical Analysis</td><td>Lexical Error</td><td>Illegal character <code>#@</code> in source, invalid token</td></tr>
+              <tr><td>Syntax Analysis</td><td>Syntax Error</td><td>Missing semicolon, unmatched parentheses</td></tr>
+              <tr><td>Semantic Analysis</td><td>Semantic Error</td><td>Type mismatch: assigning float to int without cast</td></tr>
+              <tr><td>Semantic Analysis</td><td>Semantic Error</td><td>Undeclared variable: using 'x' before declaration</td></tr>
+              <tr><td>Code Generation</td><td>Logical Error</td><td>Division by zero (detectable statically)</td></tr>
+            </tbody>
+          </table>
+
+          <h3>1.7 Bootstrapping &amp; Cousins of Compilers</h3>
+          <table>
+            <thead><tr><th>Concept</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Bootstrapping</td><td>Writing a compiler in its own source language; self-hosting compiler</td></tr>
+              <tr><td>Cross Compiler</td><td>Compiles programs for a different CPU/OS than the one it runs on; essential for embedded systems</td></tr>
+              <tr><td>Just-In-Time (JIT) Compiler</td><td>Compiles bytecode to machine code at runtime (e.g., Java JVM HotSpot, JavaScript V8)</td></tr>
+              <tr><td>Decompiler</td><td>Reverse of compilation — attempts to reconstruct source code from machine code</td></tr>
+              <tr><td>Transpiler / Source-to-Source</td><td>Compiles from one high-level language to another (e.g., TypeScript → JavaScript)</td></tr>
+            </tbody>
+          </table>
+
+          <div class="exam-box">
+            <p class="exam-label">🎯 IMPORTANT EXAM QUESTIONS</p>
+            <ul>
+              <li>What is a compiler? Explain the different phases of a compiler with a block diagram. (10 marks)</li>
+              <li>Trace the compilation of 'position = initial + rate * 60' through each phase. (10 marks)</li>
+              <li>Differentiate between a compiler and an interpreter with at least 6 points. (8 marks)</li>
+              <li>What is the role of a symbol table in compilation? What information does it store? (6 marks)</li>
+              <li>Explain the different language processors: Assembler, Linker, Loader, Preprocessor. (8 marks)</li>
+              <li>What is bootstrapping? How is it used in compiler construction? (5 marks)</li>
+            </ul>
+          </div>
+          <div class="revision-box">
+            <p class="revision-label">⚡ QUICK REVISION SUMMARY</p>
+            <ul>
+              <li>Compiler = Full translation before execution | Interpreter = Line-by-line translation at runtime</li>
+              <li>8 Phases: Lexical → Syntax → Semantic → IR Generation → Optimization → Code Generation + Symbol Table + Error Handler</li>
+              <li>Front End (machine-independent): Lexical, Syntax, Semantic | Back End (machine-dependent): Code Gen</li>
+              <li>Symbol Table: Stores name, type, scope, memory address for all identifiers — used by ALL phases</li>
+              <li>Error types: Lexical (invalid chars) → Syntax (grammar) → Semantic (type mismatch)</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ UNIT 2 -->
+        <section id="unit-2" class="topic">
+          <div class="topic-brand">
+            <div class="topic-brand-left">
+              <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+              <div>
+                <p class="topic-kicker">Diverse Loopers Crash Course Notes</p>
+                <p class="topic-note-title">Unit 2 revision sheet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-header">
+            <p class="unit-label">UNIT 2</p>
+            <h2>Lexical Analysis</h2>
+            <p class="unit-topics">Tokens • Regular Expressions • DFA/NFA • LEX Tool • Transition Diagrams</p>
+          </div>
+
+          <h3>2.1 Introduction</h3>
+          <p>Lexical Analysis (Scanning) is the first phase of compilation. The lexical analyser reads the source program character by character from left to right and groups them into meaningful sequences called <strong>lexemes</strong>. For each lexeme, the lexical analyser produces a <strong>token</strong> as output.</p>
+          <div class="concept-grid">
+            <div class="concept-card"><h4>📌 Lexical Analyser</h4><p>The part of the compiler that breaks the source program into a stream of tokens. It removes whitespace, comments, and irrelevant characters.</p></div>
+            <div class="concept-card"><h4>📌 Token</h4><p>A pair of the form &lt;token-name, attribute-value&gt;. The token-name is an abstract symbol representing a lexical category (e.g., id, number, operator).</p></div>
+            <div class="concept-card"><h4>📌 Lexeme</h4><p>The actual character sequence that matches the pattern for a token. e.g., 'position' is a lexeme for token &lt;id, 1&gt;.</p></div>
+            <div class="concept-card"><h4>📌 Pattern</h4><p>A description (often using regular expressions) of the form that lexemes of a token may take.</p></div>
+          </div>
+
+          <h3>2.2 Token, Lexeme &amp; Pattern — Examples</h3>
+          <table>
+            <thead><tr><th>Token Name</th><th>Sample Lexemes</th><th>Pattern (Informal)</th></tr></thead>
+            <tbody>
+              <tr><td><code>if</code></td><td>if</td><td>The keyword 'if'</td></tr>
+              <tr><td><code>else</code></td><td>else</td><td>The keyword 'else'</td></tr>
+              <tr><td><code>comparison</code></td><td>&lt;, &gt;, ==, &lt;=, &gt;=, !=</td><td>Any relational operator</td></tr>
+              <tr><td><code>id</code></td><td>position, rate, initial</td><td>Letter followed by letters/digits</td></tr>
+              <tr><td><code>number</code></td><td>60, 3.14, 0.01</td><td>Integer or floating-point constant</td></tr>
+              <tr><td><code>literal</code></td><td>"hello world"</td><td>Anything except " between two "</td></tr>
+              <tr><td><code>assignment</code></td><td>=</td><td>The = sign</td></tr>
+              <tr><td><code>ws</code></td><td>(blank) (tab) (newline)</td><td>Any whitespace character sequence</td></tr>
+            </tbody>
+          </table>
+
+          <h3>2.3 Regular Expressions (RE)</h3>
+          <p>Regular expressions are a formal notation for specifying patterns (sets of strings). The lexical analyser uses regular expressions to specify the pattern for each token.</p>
+          <table>
+            <thead><tr><th>RE Operator</th><th>Notation</th><th>Meaning</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Concatenation</td><td><code>xy</code></td><td>x followed by y</td><td><code>ab</code> means 'ab' only</td></tr>
+              <tr><td>Union (Alternation)</td><td><code>x | y</code></td><td>x or y</td><td><code>a|b</code> means 'a' or 'b'</td></tr>
+              <tr><td>Kleene Star</td><td><code>x*</code></td><td>Zero or more x</td><td><code>a*</code> means ε, a, aa, aaa, ...</td></tr>
+              <tr><td>One or More</td><td><code>x+</code></td><td>One or more x</td><td><code>a+ = aa*</code> means a, aa, aaa, ...</td></tr>
+              <tr><td>Optional</td><td><code>x?</code></td><td>Zero or one x</td><td><code>a?</code> means ε or a</td></tr>
+              <tr><td>Character Class</td><td><code>[xyz]</code></td><td>Any of x, y, or z</td><td><code>[a-z]</code> = any lowercase letter</td></tr>
+              <tr><td>Complement</td><td><code>[^xyz]</code></td><td>Any character except x, y, z</td><td><code>[^0-9]</code> = non-digit</td></tr>
+              <tr><td>Escape</td><td><code>\n, \t</code></td><td>Newline, tab literal</td><td><code>\n</code> is newline character</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <p style="margin:0"><strong>💡 RE for Identifiers:</strong> <code>letter → [A-Za-z_]</code> &nbsp; <code>digit → [0-9]</code> &nbsp; <code>id → letter (letter | digit)*</code></p>
+            <p style="margin:4px 0 0"><strong>💡 RE for Integers:</strong> <code>digit → [0-9]</code> &nbsp; <code>integer → digit+</code></p>
+            <p style="margin:4px 0 0"><strong>💡 RE for Floats:</strong> <code>float → digit+ . digit* | . digit+</code></p>
+          </div>
+
+          <h3>2.4 Finite Automata</h3>
+          <p>Finite Automata are mathematical models used to recognise regular languages. They are the theoretical basis for implementing lexical analysers.</p>
+
+          <h4>2.4.1 Deterministic Finite Automaton (DFA)</h4>
+          <p>In a DFA, for each state and each input symbol, there is <em>exactly one</em> transition to the next state. No ambiguity in transitions.</p>
+          <table>
+            <thead><tr><th>Component</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Set of States (Q)</td><td>Finite set of states the automaton can be in</td></tr>
+              <tr><td>Input Alphabet (Σ)</td><td>Finite set of input symbols (e.g., {0,1} or ASCII characters)</td></tr>
+              <tr><td>Transition Function (δ)</td><td>δ: Q × Σ → Q — maps (current state, input symbol) to next state</td></tr>
+              <tr><td>Start State (q₀)</td><td>The state in which the automaton begins processing</td></tr>
+              <tr><td>Accepting States (F)</td><td>A subset of Q; if machine ends in one of these, the string is accepted</td></tr>
+            </tbody>
+          </table>
+
+          <h4>2.4.2 Nondeterministic Finite Automaton (NFA)</h4>
+          <p>In an NFA, for a state and input symbol, there can be zero, one, or more transitions. NFAs can also have ε-transitions (transitions without consuming input).</p>
+          <table>
+            <thead><tr><th>Feature</th><th>DFA</th><th>NFA</th></tr></thead>
+            <tbody>
+              <tr><td>Transitions per (state, input)</td><td>Exactly one</td><td>Zero, one, or many</td></tr>
+              <tr><td>ε-transitions</td><td>Not allowed</td><td>Allowed</td></tr>
+              <tr><td>Recognition power</td><td>Same as NFA (both recognise RLs)</td><td>Same as DFA</td></tr>
+              <tr><td>Implementation complexity</td><td>Direct and efficient</td><td>Requires subset construction</td></tr>
+              <tr><td>Number of states (typically)</td><td>Potentially more (subset construction)</td><td>Fewer, more compact</td></tr>
+              <tr><td>Use in compilers</td><td>Final implementation (efficient)</td><td>Intermediate step in construction</td></tr>
+            </tbody>
+          </table>
+          <div class="memory-box">
+            <span class="box-label">🧠 MEMORY TRICK:</span>
+            <p style="margin:0">'DFA = Direct/Determined' (one path), 'NFA = Non-determined/Multiple paths'. Both recognise EXACTLY the same set of languages (Regular Languages)!</p>
+          </div>
+
+          <h3>2.5 RE to NFA to DFA Conversion</h3>
+          <div class="diagram">
+            <div class="flow-row">
+              <div class="flow-box">Regular Expression</div><div class="flow-arrow">→</div>
+              <div class="flow-box">NFA<br><small>(Thompson's)</small></div><div class="flow-arrow">→</div>
+              <div class="flow-box">DFA<br><small>(Subset Constr.)</small></div><div class="flow-arrow">→</div>
+              <div class="flow-box">Minimised DFA</div><div class="flow-arrow">→</div>
+              <div class="flow-box">Lexical Analyser Code</div>
+            </div>
+          </div>
+
+          <h4>2.5.1 Thompson's Construction (RE → NFA)</h4>
+          <table>
+            <thead><tr><th>RE Construct</th><th>NFA Construction Rule</th></tr></thead>
+            <tbody>
+              <tr><td>Single symbol 'a'</td><td>Start state → (on 'a') → Accept state; single transition</td></tr>
+              <tr><td>ε (empty string)</td><td>Start state → (on ε) → Accept state</td></tr>
+              <tr><td>r | s (Union)</td><td>New start state with ε-transitions to start of both r and s NFAs; merge accepts</td></tr>
+              <tr><td>rs (Concatenation)</td><td>Accept of r connected by ε to start of s; r's accept becomes non-accept</td></tr>
+              <tr><td>r* (Kleene Star)</td><td>New start/accept state; ε-transitions: start→r, end-of-r→start, start→accept</td></tr>
+            </tbody>
+          </table>
+
+          <h4>2.5.2 Subset Construction (NFA → DFA)</h4>
+          <table>
+            <thead><tr><th>Step</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>1. ε-closure</td><td>Compute all NFA states reachable from a state using only ε-transitions</td></tr>
+              <tr><td>2. Start State</td><td>DFA start state = ε-closure({NFA start state})</td></tr>
+              <tr><td>3. Transitions</td><td>For each DFA state S and input a: new DFA state = ε-closure(move(S, a))</td></tr>
+              <tr><td>4. Accept States</td><td>DFA state is accepting if it contains at least one NFA accepting state</td></tr>
+              <tr><td>5. Repeat</td><td>Continue until no new DFA states are discovered</td></tr>
+            </tbody>
+          </table>
+
+          <h3>2.6 LEX Tool</h3>
+          <p>LEX (also FLEX on Linux) is an automatic lexical analyser generator. Given a specification file (patterns and actions), LEX generates C code for a lexical analyser.</p>
+          <table>
+            <thead><tr><th>Section of LEX File</th><th>Content</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Declarations (%{ %})</td><td>C declarations, includes, global variables</td><td><code>#include &lt;stdio.h&gt;</code>, <code>int count=0;</code></td></tr>
+              <tr><td>Translation Rules (%%)</td><td>Pattern { action } pairs</td><td><code>[a-z]+ { printf("id:%s", yytext); }</code></td></tr>
+              <tr><td>Auxiliary Functions (%%)</td><td>Supporting C functions</td><td><code>int main() { yylex(); return 0; }</code></td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Important LEX Variables:</span>
+            <p style="margin:0"><code>yytext</code> = matched string &nbsp;|&nbsp; <code>yyleng</code> = length of match &nbsp;|&nbsp; <code>yylex()</code> = function to call lexer &nbsp;|&nbsp; <code>yyin</code> = input file pointer</p>
+          </div>
+
+          <div class="exam-box">
+            <p class="exam-label">🎯 IMPORTANT EXAM QUESTIONS</p>
+            <ul>
+              <li>Define Token, Lexeme, and Pattern. Give examples for each from a C program. (6 marks)</li>
+              <li>What is a DFA? Construct a DFA to accept strings over {a,b} that end with 'abb'. (10 marks)</li>
+              <li>Describe Thompson's Construction to convert a regular expression to NFA with example. (10 marks)</li>
+              <li>Explain the Subset Construction algorithm to convert NFA to DFA with an example. (10 marks)</li>
+              <li>What is LEX? Explain its structure with an example specification file. (8 marks)</li>
+            </ul>
+          </div>
+          <div class="revision-box">
+            <p class="revision-label">⚡ QUICK REVISION SUMMARY</p>
+            <ul>
+              <li>Lexical Analysis: Groups characters into tokens; removes whitespace/comments</li>
+              <li>Token = &lt;token-name, attribute-value&gt; | Lexeme = actual string | Pattern = RE description</li>
+              <li>DFA: Exactly one transition per (state, input pair) — efficient, direct implementation</li>
+              <li>NFA: Multiple/zero transitions allowed; ε-transitions allowed — more compact but needs simulation</li>
+              <li>RE→NFA: Thompson's Construction | NFA→DFA: Subset Construction | DFA→Min DFA: Hopcroft's algorithm</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ UNIT 3 -->
+        <section id="unit-3" class="topic">
+          <div class="topic-brand">
+            <div class="topic-brand-left">
+              <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+              <div>
+                <p class="topic-kicker">Diverse Loopers Crash Course Notes</p>
+                <p class="topic-note-title">Unit 3 revision sheet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-header">
+            <p class="unit-label">UNIT 3</p>
+            <h2>Syntax Analysis (Parsing)</h2>
+            <p class="unit-topics">CFG • Parse Trees • Top-Down • Bottom-Up • LL(1) • LR • YACC</p>
+          </div>
+
+          <h3>3.1 Introduction</h3>
+          <p>Syntax Analysis (Parsing) is the second phase of the compiler. The parser takes the token stream from the lexical analyser and groups tokens into grammatical phrases as defined by the grammar of the programming language. It produces a <strong>parse tree</strong> or an <strong>abstract syntax tree (AST)</strong>.</p>
+          <div class="note">
+            <span class="box-label">📌 Parser:</span>
+            <p style="margin:0">A program that takes a sequence of tokens and determines whether it can be generated by a grammar (syntactic analysis). If yes, it builds a parse tree; otherwise it reports syntax errors.</p>
+          </div>
+
+          <h3>3.2 Context-Free Grammar (CFG)</h3>
+          <div class="note">
+            <span class="box-label">📌 CFG Definition:</span>
+            <p style="margin:0">A CFG G = (V, T, P, S) where V = non-terminals, T = terminals (tokens), P = production rules, S = start symbol.</p>
+          </div>
+          <table>
+            <thead><tr><th>CFG Component</th><th>Description</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Non-terminals (V)</td><td>Variables that represent syntactic categories</td><td>E, T, F, stmt, expr</td></tr>
+              <tr><td>Terminals (T)</td><td>Actual tokens/symbols in the language</td><td>id, +, *, (, ), num</td></tr>
+              <tr><td>Production Rules (P)</td><td>Rules of the form: A → α (non-terminal → string)</td><td><code>E → E + T | T</code></td></tr>
+              <tr><td>Start Symbol (S)</td><td>The non-terminal from which derivation begins</td><td>E (for expressions)</td></tr>
+            </tbody>
+          </table>
+
+          <h4>3.2.1 Derivation, Parse Trees, and Ambiguity</h4>
+          <table>
+            <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+            <tbody>
+              <tr><td>Derivation</td><td>A sequence of replacements of non-terminals using production rules to produce a terminal string</td></tr>
+              <tr><td>Leftmost Derivation</td><td>Always replace the leftmost non-terminal; used by top-down parsers</td></tr>
+              <tr><td>Rightmost Derivation</td><td>Always replace the rightmost non-terminal; used by bottom-up parsers (in reverse)</td></tr>
+              <tr><td>Parse Tree</td><td>A graphical representation of a derivation; leaves = terminals, interior nodes = non-terminals</td></tr>
+              <tr><td>Ambiguous Grammar</td><td>A grammar where a string has more than one parse tree</td></tr>
+              <tr><td>Dangling Else Problem</td><td>Classic ambiguity in if-then-else constructs; resolved by associating else with nearest if</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Classic Expression Grammar:</span>
+            <p style="margin:0"><code>E → E + T | T</code> &nbsp; <code>T → T * F | F</code> &nbsp; <code>F → (E) | id</code><br>This grammar correctly handles precedence (* over +) and associativity (left).</p>
+          </div>
+
+          <h3>3.3 Elimination of Ambiguity, Left Recursion &amp; Left Factoring</h3>
+          <table>
+            <thead><tr><th>Problem</th><th>Why It Matters</th><th>Solution</th></tr></thead>
+            <tbody>
+              <tr><td>Ambiguous Grammar</td><td>Parser can't decide which parse tree to build; non-deterministic</td><td>Rewrite grammar; use precedence/associativity rules</td></tr>
+              <tr><td>Left Recursion (A → Aα)</td><td>Causes top-down parsers to loop infinitely</td><td>Eliminate: <code>A → βA'  A' → αA' | ε</code></td></tr>
+              <tr><td>Left Factoring</td><td>Multiple productions with same prefix cause parser confusion</td><td>Factor: <code>A → αβ | αγ</code> becomes <code>A → αA'  A' → β | γ</code></td></tr>
+            </tbody>
+          </table>
+
+          <h3>3.4 Top-Down Parsing</h3>
+          <table>
+            <thead><tr><th>Approach</th><th>Description</th><th>Complexity</th></tr></thead>
+            <tbody>
+              <tr><td>Recursive Descent</td><td>Each non-terminal → one procedure; procedure calls mirror grammar rules</td><td>O(n) for LL(1)</td></tr>
+              <tr><td>Predictive Parsing (LL(1))</td><td>Uses a parsing table to select production without backtracking</td><td>O(n)</td></tr>
+              <tr><td>Backtracking Parser</td><td>Tries all alternatives; backtracks on failure</td><td>Exponential — impractical</td></tr>
+            </tbody>
+          </table>
+
+          <h4>3.4.1 LL(1) Parsing</h4>
+          <p>LL(1) means: <strong>L</strong>eft-to-right scan, <strong>L</strong>eftmost derivation, <strong>1</strong> token of lookahead. LL(1) parsers use a parsing table constructed from FIRST and FOLLOW sets.</p>
+          <table>
+            <thead><tr><th>Concept</th><th>Definition</th><th>Computation Rule</th></tr></thead>
+            <tbody>
+              <tr><td>FIRST(α)</td><td>Set of terminals that begin strings derivable from α</td><td>FIRST of terminal = {terminal}; FIRST of non-terminal = union of FIRST of its production bodies</td></tr>
+              <tr><td>FOLLOW(A)</td><td>Set of terminals that can appear immediately after A in a sentential form</td><td>FOLLOW of start symbol includes $; for A→αBβ: FIRST(β)-{ε} ⊆ FOLLOW(B); if β⇒ε, FOLLOW(A) ⊆ FOLLOW(B)</td></tr>
+              <tr><td>LL(1) Table M[A, a]</td><td>= production to use when non-terminal is A and lookahead is a</td><td>For A→α: add A→α to M[A,a] for each a in FIRST(α); if ε in FIRST(α), add for each b in FOLLOW(A)</td></tr>
+            </tbody>
+          </table>
+          <div class="memory-box">
+            <span class="box-label">🧠 MEMORY TRICK:</span>
+            <p style="margin:0">'LL First-Follow Foundation' — LL parsers need FIRST sets for direct selections and FOLLOW sets for ε-productions!</p>
+          </div>
+
+          <h3>3.5 Bottom-Up Parsing</h3>
+          <table>
+            <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+            <tbody>
+              <tr><td>Handle</td><td>A substring of the current sentential form that matches the right side of a production and can be reduced</td></tr>
+              <tr><td>Shift</td><td>Push the current input token onto the parser stack</td></tr>
+              <tr><td>Reduce</td><td>Pop the handle off the stack, replace with the corresponding non-terminal</td></tr>
+              <tr><td>Shift-Reduce Conflict</td><td>Parser can't decide whether to shift or reduce at a given step</td></tr>
+              <tr><td>Reduce-Reduce Conflict</td><td>Two different productions could both apply for a reduction</td></tr>
+            </tbody>
+          </table>
+
+          <h4>3.5.1 LR Parsing — Family Overview</h4>
+          <table>
+            <thead><tr><th>LR Type</th><th>Full Name</th><th>Power</th><th>Complexity</th></tr></thead>
+            <tbody>
+              <tr><td>LR(0)</td><td>LR with 0 lookahead</td><td>Weakest LR; handles limited grammars</td><td>Simplest table</td></tr>
+              <tr><td>SLR(1)</td><td>Simple LR with 1 lookahead</td><td>Uses FOLLOW sets to resolve conflicts</td><td>Moderate</td></tr>
+              <tr><td>LALR(1)</td><td>Lookahead LR(1)</td><td>Merges LR(1) states with same core; yacc/bison uses this</td><td>Practical balance</td></tr>
+              <tr><td>LR(1)</td><td>Canonical LR with 1 lookahead</td><td>Most powerful; handles all LR(1) grammars</td><td>Large table — rarely used directly</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Parser Power:</span>
+            <p style="margin:0">LR(0) ⊂ SLR(1) ⊂ LALR(1) ⊂ LR(1). Every LL(1) grammar is also LALR(1). <strong>LALR(1) is the standard for compiler tools.</strong></p>
+          </div>
+
+          <h4>3.5.2 LR Parsing Algorithm (Conceptual)</h4>
+          <table>
+            <thead><tr><th>Table</th><th>Content</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td>ACTION[s, a]</td><td>shift t / reduce A→β / accept / error</td><td>Determines next action for state s with terminal a on input</td></tr>
+              <tr><td>GOTO[s, A]</td><td>New state t after reducing to non-terminal A</td><td>After reducing with A, which state to go to from state s</td></tr>
+            </tbody>
+          </table>
+
+          <h3>3.6 YACC (Yet Another Compiler-Compiler)</h3>
+          <p>YACC is a parser generator tool. Given a grammar specification, YACC generates C code for an LALR(1) parser. BISON is the GNU version of YACC.</p>
+          <table>
+            <thead><tr><th>Section</th><th>Content</th></tr></thead>
+            <tbody>
+              <tr><td>Declarations (%{ %})</td><td>Token definitions (%token), type declarations, C includes</td></tr>
+              <tr><td>Grammar Rules (%%)</td><td><code>production : body { semantic action };</code> where action is C code</td></tr>
+              <tr><td>C Functions (%%)</td><td>Supporting C code; includes <code>main()</code> and <code>yyerror()</code></td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Key Variables:</span>
+            <p style="margin:0"><code>$$</code> = value of left side (result) &nbsp;|&nbsp; <code>$1, $2</code> = values of components &nbsp;|&nbsp; <code>yyparse()</code> = call parser &nbsp;|&nbsp; <code>yyerror()</code> = error function</p>
+          </div>
+
+          <div class="exam-box">
+            <p class="exam-label">🎯 IMPORTANT EXAM QUESTIONS</p>
+            <ul>
+              <li>Define CFG. Explain its components with an example grammar for arithmetic expressions. (8 marks)</li>
+              <li>What is an ambiguous grammar? Show that E→E+E | E*E | (E) | id is ambiguous. (8 marks)</li>
+              <li>Explain left recursion and left factoring. Show how to eliminate both with examples. (10 marks)</li>
+              <li>Compute FIRST and FOLLOW sets for the given grammar. Construct the LL(1) parsing table. (12 marks)</li>
+              <li>Compare SLR(1), LALR(1), and LR(1) parsers. Which is used in practice and why? (8 marks)</li>
+              <li>What is YACC? Describe the structure of a YACC specification file with an example. (8 marks)</li>
+            </ul>
+          </div>
+          <div class="revision-box">
+            <p class="revision-label">⚡ QUICK REVISION SUMMARY</p>
+            <ul>
+              <li>CFG: G = (V, T, P, S); more powerful than RE — handles nesting/recursion</li>
+              <li>Top-Down: Starts from root; leftmost derivation; uses FIRST/FOLLOW; LL(1) parsing</li>
+              <li>FIRST(α) = terminals at start of strings from α | FOLLOW(A) = terminals that follow A</li>
+              <li>Bottom-Up: Shift-Reduce; builds from leaves to root; rightmost derivation in reverse</li>
+              <li>LR family (weakest to strongest): LR(0) &lt; SLR(1) &lt; LALR(1) &lt; LR(1); YACC uses LALR(1)</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ UNIT 4 -->
+        <section id="unit-4" class="topic">
+          <div class="topic-brand">
+            <div class="topic-brand-left">
+              <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+              <div>
+                <p class="topic-kicker">Diverse Loopers Crash Course Notes</p>
+                <p class="topic-note-title">Unit 4 revision sheet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-header">
+            <p class="unit-label">UNIT 4</p>
+            <h2>Syntax-Directed Translation</h2>
+            <p class="unit-topics">Attribute Grammars • S-Attributed • L-Attributed • Annotated Parse Trees • DAGs</p>
+          </div>
+
+          <h3>4.1 Introduction</h3>
+          <p>Syntax-Directed Translation (SDT) is a method of associating semantic actions (code) with grammar productions. Each production rule is augmented with a semantic rule (or action) that computes attribute values and can produce intermediate code.</p>
+          <div class="concept-grid">
+            <div class="concept-card"><h4>📌 SDD</h4><p>A context-free grammar together with attributes and rules. Each attribute is associated with a grammar symbol; rules specify how attribute values are computed.</p></div>
+            <div class="concept-card"><h4>📌 Synthesised Attribute</h4><p>An attribute whose value is computed from attributes of its children in the parse tree. Computed <strong>bottom-up</strong>.</p></div>
+            <div class="concept-card"><h4>📌 Inherited Attribute</h4><p>An attribute whose value is computed from attributes of its parent or siblings in the parse tree. Computed <strong>top-down</strong>.</p></div>
+            <div class="concept-card"><h4>📌 Annotated Parse Tree</h4><p>A parse tree with attribute values written at each node, showing the results of semantic evaluation.</p></div>
+          </div>
+
+          <h3>4.2 Attribute Grammars</h3>
+          <table>
+            <thead><tr><th>Concept</th><th>Definition</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Synthesised Attribute</td><td>Defined from attributes of children; computed bottom-up</td><td><code>E.val = E₁.val + T.val</code> (for E → E + T)</td></tr>
+              <tr><td>Inherited Attribute</td><td>Defined from parent/sibling attributes; computed top-down</td><td><code>T.type = E.type</code> (passing type info down)</td></tr>
+              <tr><td>Annotated Parse Tree</td><td>Parse tree with attribute values written at each node</td><td>E.val=14, T.val=10, F.val=5 at each node</td></tr>
+              <tr><td>Dependency Graph</td><td>Shows dependencies between attribute instances; used to order evaluation</td><td>Node B depends on Node A if B is computed from A</td></tr>
+            </tbody>
+          </table>
+
+          <h3>4.3 S-Attributed and L-Attributed Definitions</h3>
+          <table>
+            <thead><tr><th>Type</th><th>Definition</th><th>Parser Suitability</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>S-Attributed SDD</td><td>Uses only synthesised attributes; all rules compute attributes from children</td><td>Bottom-up parsers (LR); actions at end of rule</td><td><code>E → E + T { E.val = E₁.val + T.val }</code></td></tr>
+              <tr><td>L-Attributed SDD</td><td>Synthesised attributes + inherited attributes whose value depends only on left siblings or parent (left-to-right ordering)</td><td>Top-down parsers (LL); both LL and LR with care</td><td><code>D → T L { L.inh = T.type }</code></td></tr>
+            </tbody>
+          </table>
+          <div class="memory-box">
+            <span class="box-label">🧠 MEMORY TRICK:</span>
+            <p style="margin:0">'S = Synthesised-only (Simple, Bottom-up)' | 'L = Left to right (also inherited, Left siblings or parent only)'</p>
+          </div>
+
+          <h3>4.4 Evaluation of SDDs</h3>
+          <table>
+            <thead><tr><th>Scheme</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Dependency Graph</td><td>A directed graph where nodes = attribute instances; edge from b to c means c depends on b</td></tr>
+              <tr><td>Topological Sort</td><td>Any ordering of dependency graph nodes consistent with edges; gives valid evaluation order</td></tr>
+              <tr><td>Parse-Tree Order</td><td>For S-attributed: evaluate in post-order (children before parents); always works</td></tr>
+              <tr><td>Circular Dependency</td><td>If dependency graph has a cycle — SDD is not well-defined; no valid evaluation order</td></tr>
+            </tbody>
+          </table>
+
+          <h3>4.5 Syntax-Directed Translation Schemes (SDTs)</h3>
+          <table>
+            <thead><tr><th>SDT Placement</th><th>When Executed</th><th>Best For</th></tr></thead>
+            <tbody>
+              <tr><td>Action at end of production</td><td>After all RHS symbols recognised</td><td>S-attributed definitions (most common)</td></tr>
+              <tr><td>Action in middle of production</td><td>When parser reaches that point in parsing</td><td>L-attributed definitions; generates code during parsing</td></tr>
+              <tr><td>Action at start of production</td><td>Before any RHS symbols recognised</td><td>Initialization; inherited attribute computation</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 SDT for Desk Calculator:</span>
+            <p style="margin:0"><code>E → E + T { print('+') } | T</code> &nbsp; <code>T → T * F { print('*') } | F</code> &nbsp; <code>F → num { print(num.val) }</code></p>
+          </div>
+
+          <h3>4.6 Directed Acyclic Graphs (DAG) for Expressions</h3>
+          <p>A DAG is a compact representation of an expression where common subexpressions are shared (represented by a single node). DAGs save space and reveal opportunities for optimisation.</p>
+          <table>
+            <thead><tr><th>Feature</th><th>Parse Tree / AST</th><th>DAG</th></tr></thead>
+            <tbody>
+              <tr><td>Common subexpressions</td><td>Repeated — separate nodes</td><td>Shared — single node with multiple parents</td></tr>
+              <tr><td>Space efficiency</td><td>More space (full tree)</td><td>Less space (sharing)</td></tr>
+              <tr><td>Use</td><td>Syntax analysis, semantic checks</td><td>Optimisation — common subexpression elimination</td></tr>
+              <tr><td>Creation</td><td>One node per operator/operand occurrence</td><td>Reuse node if same operator and same operands</td></tr>
+            </tbody>
+          </table>
+
+          <h3>4.7 Translation of Declarations</h3>
+          <table>
+            <thead><tr><th>Variable</th><th>Role in Offset Calculation</th></tr></thead>
+            <tbody>
+              <tr><td><code>offset</code> (global)</td><td>Tracks the next available memory offset; initialised to 0 for each scope</td></tr>
+              <tr><td><code>T.width</code></td><td>The width (bytes) of type T: int=4, float=8, bool=1, pointer=8</td></tr>
+              <tr><td><code>id.offset</code></td><td>The memory offset assigned to variable id when declared</td></tr>
+            </tbody>
+          </table>
+
+          <div class="exam-box">
+            <p class="exam-label">🎯 IMPORTANT EXAM QUESTIONS</p>
+            <ul>
+              <li>Explain Syntax-Directed Definitions. What are synthesised and inherited attributes? Give examples. (10 marks)</li>
+              <li>Explain S-attributed and L-attributed SDDs with examples. How do they differ? (8 marks)</li>
+              <li>What is an annotated parse tree? Draw one for '3 * 4 + 5' using expression grammar. (10 marks)</li>
+              <li>Explain how a DAG differs from an AST. What is its use in code optimisation? (6 marks)</li>
+              <li>Write an SDD for translation of arithmetic expressions to postfix notation. (8 marks)</li>
+            </ul>
+          </div>
+          <div class="revision-box">
+            <p class="revision-label">⚡ QUICK REVISION SUMMARY</p>
+            <ul>
+              <li>SDT = Grammar + Attributes + Semantic Rules; associates meaning with syntax</li>
+              <li>Synthesised: Value from children (bottom-up) | Inherited: Value from parent/left-siblings (top-down)</li>
+              <li>S-Attributed: Only synthesised; for LR parsers | L-Attributed: Synthesised + restricted inherited; for LL</li>
+              <li>DAG: Compact expression tree where common subexpressions are shared; used for optimisation</li>
+              <li>SDT Action placement: End of production (S-attributed), Middle (L-attributed/code generation)</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ UNIT 5 -->
+        <section id="unit-5" class="topic">
+          <div class="topic-brand">
+            <div class="topic-brand-left">
+              <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+              <div>
+                <p class="topic-kicker">Diverse Loopers Crash Course Notes</p>
+                <p class="topic-note-title">Unit 5 revision sheet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-header">
+            <p class="unit-label">UNIT 5</p>
+            <h2>Semantic Analysis &amp; Intermediate Code</h2>
+            <p class="unit-topics">Type Checking • Symbol Table • TAC • Polish Notation • Quadruples</p>
+          </div>
+
+          <h3>5.1 Semantic Analysis</h3>
+          <p>Semantic Analysis is the third phase of the compiler. It checks the program for semantic errors — errors that are syntactically valid but logically incorrect — and gathers type information needed for code generation.</p>
+          <table>
+            <thead><tr><th>Semantic Check</th><th>Description</th><th>Example Error</th></tr></thead>
+            <tbody>
+              <tr><td>Type Checking</td><td>Ensures operations are applied to compatible types</td><td><code>int x = 3.14</code> without cast</td></tr>
+              <tr><td>Undeclared Variables</td><td>Ensures variables are declared before use</td><td>Using 'y' without <code>int y;</code></td></tr>
+              <tr><td>Scope Rules</td><td>Ensures variables are used within their valid scope</td><td>Accessing local variable outside function</td></tr>
+              <tr><td>Array Bound Checks</td><td>Ensures indices are valid (static check)</td><td><code>int a[5]; a[10] = 1</code></td></tr>
+              <tr><td>Function Argument Matching</td><td>Number and type of arguments match declaration</td><td><code>add(1, 2, 3)</code> for <code>add(int, int)</code></td></tr>
+              <tr><td>Return Type</td><td>Returned value matches declared return type</td><td>Returning float from int function</td></tr>
+              <tr><td>Duplicate Declarations</td><td>Variables not declared more than once in same scope</td><td><code>int x; int x;</code> in same block</td></tr>
+            </tbody>
+          </table>
+
+          <h3>5.2 Type Systems</h3>
+          <table>
+            <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+            <tbody>
+              <tr><td>Type Expression</td><td>A description of a type: basic type (int, float), constructor (array, pointer, record)</td></tr>
+              <tr><td>Type Equivalence (Name)</td><td>Two types are equal only if they have the same name; Pascal-style</td></tr>
+              <tr><td>Type Equivalence (Structural)</td><td>Two types are equal if their structures are identical; C-style</td></tr>
+              <tr><td>Widening Conversion</td><td>Automatic implicit conversion from smaller to larger type: int → float → double</td></tr>
+              <tr><td>Narrowing Conversion</td><td>Requires explicit cast; possible data loss: double → int</td></tr>
+              <tr><td>Coercion</td><td>Implicit type conversion inserted by compiler (e.g., int to float in mixed expression)</td></tr>
+              <tr><td>Polymorphism</td><td>Functions/operators work on multiple types: overloading, generics</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Type Widening Order:</span>
+            <p style="margin:0"><code>bool → char → short → int → long → float → double</code> — each conversion is widening (safe, no data loss)</p>
+          </div>
+
+          <h3>5.3 Symbol Table — Detailed</h3>
+          <table>
+            <thead><tr><th>Implementation</th><th>Description</th><th>Time Complexity</th></tr></thead>
+            <tbody>
+              <tr><td>Linear List</td><td>Simple array or linked list of entries</td><td>O(n) lookup — too slow for large programs</td></tr>
+              <tr><td>Hash Table</td><td>Hash function maps identifier → bucket; most common</td><td>O(1) average lookup</td></tr>
+              <tr><td>Binary Search Tree</td><td>Sorted tree of entries</td><td>O(log n) lookup</td></tr>
+              <tr><td>Scope Stack (Chaining)</td><td>Stack of hash tables; one per scope; look up through stack</td><td>O(depth) worst case</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Scope Management:</span>
+            <p style="margin:0">On entering a new scope: <strong>push</strong> new symbol table. On exit: <strong>pop</strong> the table. Lookup searches from innermost to outermost scope.</p>
+          </div>
+
+          <h3>5.4 Intermediate Code Generation</h3>
+          <div class="insight-box">
+            <span class="box-label">💡 Benefit:</span>
+            <p style="margin:0">With IR: N source languages + M target machines = <strong>N+M</strong> translators. Without IR: <strong>N×M</strong> translators needed!</p>
+          </div>
+          <table>
+            <thead><tr><th>IR Form</th><th>Description</th><th>Use Case</th></tr></thead>
+            <tbody>
+              <tr><td>Three-Address Code (TAC)</td><td>Each instruction has at most one operator and three operands: <code>x = y op z</code></td><td>Most popular; easy optimisation</td></tr>
+              <tr><td>Abstract Syntax Tree (AST)</td><td>Tree form of syntax; structure mirrors source code hierarchy</td><td>Frontend; semantic analysis</td></tr>
+              <tr><td>DAG</td><td>AST with shared nodes for common subexpressions</td><td>Optimisation</td></tr>
+              <tr><td>Polish (Postfix) Notation</td><td>Operators follow operands; no parentheses needed</td><td>Stack-machine code</td></tr>
+              <tr><td>Quadruples</td><td>(op, arg1, arg2, result) — four fields; explicit temporaries</td><td>Classic IR representation</td></tr>
+              <tr><td>Triples</td><td>(op, arg1, arg2) — result is implicit position in array</td><td>Space-efficient; harder to optimise</td></tr>
+              <tr><td>Indirect Triples</td><td>Pointer array into triples list; allows reordering</td><td>Optimisation-friendly triples</td></tr>
+              <tr><td>Static Single Assignment (SSA)</td><td>Each variable assigned exactly once; φ-functions for merge points</td><td>Modern optimisation (LLVM)</td></tr>
+            </tbody>
+          </table>
+
+          <h4>5.4.1 Three-Address Code (TAC)</h4>
+          <table>
+            <thead><tr><th>TAC Form</th><th>Instruction Format</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Assignment</td><td><code>x = y op z</code></td><td><code>t1 = a + b</code></td></tr>
+              <tr><td>Unary</td><td><code>x = op y</code></td><td><code>t2 = -t1</code></td></tr>
+              <tr><td>Copy</td><td><code>x = y</code></td><td><code>x = t2</code></td></tr>
+              <tr><td>Unconditional Jump</td><td><code>goto L</code></td><td><code>goto L3</code></td></tr>
+              <tr><td>Conditional Jump</td><td><code>if x relop y goto L</code></td><td><code>if a &gt; b goto L5</code></td></tr>
+              <tr><td>Procedure Call</td><td><code>param x; call p, n</code></td><td><code>param a; call foo, 2</code></td></tr>
+              <tr><td>Return</td><td><code>return x</code></td><td><code>return t3</code></td></tr>
+              <tr><td>Array Access</td><td><code>x = y[i]</code> or <code>x[i] = y</code></td><td><code>t4 = A[j]; B[k] = t4</code></td></tr>
+            </tbody>
+          </table>
+
+          <h4>5.4.2 Quadruples vs Triples</h4>
+          <table>
+            <thead><tr><th>Feature</th><th>Quadruples</th><th>Triples</th></tr></thead>
+            <tbody>
+              <tr><td>Format</td><td>(op, arg1, arg2, result)</td><td>(op, arg1, arg2) — result implicit</td></tr>
+              <tr><td>Temporaries</td><td>Explicit named temporaries</td><td>Implicit — position in array</td></tr>
+              <tr><td>Reordering ease</td><td>Easy — result has a name</td><td>Hard — references by position</td></tr>
+              <tr><td>Space</td><td>More space (result field)</td><td>Less space</td></tr>
+              <tr><td>Use</td><td>Most compilers; easy optimisation</td><td>Older approach; less common now</td></tr>
+            </tbody>
+          </table>
+          <div class="memory-box">
+            <span class="box-label">🧠 MEMORY TRICK:</span>
+            <p style="margin:0">'Quad = 4 fields (op, a1, a2, result)' | 'Triple = 3 fields (op, a1, a2)' | Indirect Triple = pointer array into triple table</p>
+          </div>
+
+          <div class="exam-box">
+            <p class="exam-label">🎯 IMPORTANT EXAM QUESTIONS</p>
+            <ul>
+              <li>What is semantic analysis? List the types of semantic errors detected with examples. (8 marks)</li>
+              <li>Describe the structure and implementation of a symbol table. How is scope managed? (10 marks)</li>
+              <li>What is intermediate code? Why is it used? List different forms of intermediate representations. (8 marks)</li>
+              <li>Generate Three-Address Code for: <code>a = b * (-c) + b * (-c)</code>. Show all temporaries. (8 marks)</li>
+              <li>Explain Quadruples, Triples, and Indirect Triples. Show representations for: <code>x = (a+b) * (a+b)</code>. (10 marks)</li>
+            </ul>
+          </div>
+          <div class="revision-box">
+            <p class="revision-label">⚡ QUICK REVISION SUMMARY</p>
+            <ul>
+              <li>Semantic Analysis: Type checking, undeclared vars, scope violations, function argument matching</li>
+              <li>Widening: bool→char→int→long→float→double (implicit, safe) | Narrowing: requires explicit cast</li>
+              <li>Symbol Table: Hash table (O(1) lookup); scope stack — push on entry, pop on exit</li>
+              <li>TAC: x = y op z — at most one operator, three addresses; most common IR</li>
+              <li>Quadruples: (op, arg1, arg2, result) — 4 fields | Triples: (op, arg1, arg2) — 3 fields</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ UNIT 6 -->
+        <section id="unit-6" class="topic">
+          <div class="topic-brand">
+            <div class="topic-brand-left">
+              <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+              <div>
+                <p class="topic-kicker">Diverse Loopers Crash Course Notes</p>
+                <p class="topic-note-title">Unit 6 revision sheet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-header">
+            <p class="unit-label">UNIT 6</p>
+            <h2>Runtime Environments</h2>
+            <p class="unit-topics">Storage • Activation Records • Stack • Heap • Parameter Passing</p>
+          </div>
+
+          <h3>6.1 Introduction</h3>
+          <p>Runtime environments deal with how the compiler organises memory during program execution. The compiler must generate code that manages data storage, function calls, and parameter passing correctly at runtime.</p>
+
+          <h3>6.2 Storage Organisation</h3>
+          <table>
+            <thead><tr><th>Memory Area</th><th>Contents</th><th>Management</th></tr></thead>
+            <tbody>
+              <tr><td>Code/Text Segment</td><td>Compiled machine instructions; read-only</td><td>Fixed at compile time</td></tr>
+              <tr><td>Static Data</td><td>Global and static variables; constants</td><td>Fixed size, allocated at compile time</td></tr>
+              <tr><td>Stack (Call Stack)</td><td>Activation records for function calls; local variables, parameters</td><td>Dynamic — LIFO; managed automatically</td></tr>
+              <tr><td>Heap</td><td>Dynamically allocated memory (malloc, new)</td><td>Dynamic — managed by programmer/GC</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Memory Layout (low to high address):</span>
+            <p style="margin:0"><code>Code | Static Data | Heap (grows ↑) | ... | Stack (grows ↓)</code></p>
+          </div>
+
+          <h3>6.3 Activation Records (Stack Frames)</h3>
+          <p>An activation record (or stack frame) is the block of memory allocated on the call stack when a function is called. It stores all information needed to execute that function and return to the caller.</p>
+          <table>
+            <thead><tr><th>Field</th><th>Content</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Return Value</td><td>Space for the function's return value</td><td>May be in register instead</td></tr>
+              <tr><td>Actual Parameters</td><td>Copies of or references to arguments passed by caller</td><td>Evaluated before call</td></tr>
+              <tr><td>Control Link (Dynamic Link)</td><td>Pointer to activation record of caller</td><td>Restores stack on return</td></tr>
+              <tr><td>Access Link (Static Link)</td><td>Pointer to activation record of statically enclosing function</td><td>For nested functions (Pascal, Ada)</td></tr>
+              <tr><td>Saved Machine Status</td><td>Registers and program counter saved before call</td><td>Restored on return</td></tr>
+              <tr><td>Local Variables</td><td>Variables declared inside the function</td><td>Allocated in frame</td></tr>
+              <tr><td>Temporaries</td><td>Intermediate values during expression evaluation</td><td>Compiler-generated</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Stack Pointers:</span>
+            <p style="margin:0"><code>SP</code> (Stack Pointer) = top of stack | <code>FP/BP</code> (Frame Pointer/Base Pointer) = base of current activation record. Local var at FP + offset.</p>
+          </div>
+
+          <h3>6.4 Parameter Passing Mechanisms</h3>
+          <table>
+            <thead><tr><th>Mechanism</th><th>How It Works</th><th>Aliasing?</th><th>Languages</th></tr></thead>
+            <tbody>
+              <tr><td>Call by Value</td><td>Copy of actual parameter value passed; callee has its own copy</td><td>No aliasing</td><td>C (default), Java (primitives)</td></tr>
+              <tr><td>Call by Reference</td><td>Address of actual parameter passed; callee modifies original</td><td>Aliasing possible</td><td>C++ (&amp;), FORTRAN, Pascal VAR</td></tr>
+              <tr><td>Call by Value-Result</td><td>Copy passed in; result copied back on return (no aliasing during call)</td><td>No aliasing</td><td>Ada (in out)</td></tr>
+              <tr><td>Call by Name</td><td>Textual substitution of actual parameter at each use (lazy)</td><td>Possible</td><td>Algol 60; modern: macros</td></tr>
+              <tr><td>Call by Need (Lazy)</td><td>Evaluate only when needed; memoize result</td><td>No</td><td>Haskell, lazy languages</td></tr>
+            </tbody>
+          </table>
+          <div class="memory-box">
+            <span class="box-label">🧠 MEMORY TRICK:</span>
+            <p style="margin:0">'VRN-NL' — <strong>V</strong>alue, <strong>R</strong>eference, Value-Result, <strong>N</strong>ame, <strong>N</strong>eed/<strong>L</strong>azy — 5 parameter passing modes!</p>
+          </div>
+
+          <h3>6.5 Storage Allocation Strategies</h3>
+          <table>
+            <thead><tr><th>Strategy</th><th>Description</th><th>Used For</th></tr></thead>
+            <tbody>
+              <tr><td>Static Allocation</td><td>Memory sizes known at compile time; fixed addresses assigned</td><td>Global vars, static vars, constants, code</td></tr>
+              <tr><td>Stack Allocation</td><td>LIFO allocation; activation records pushed/popped</td><td>Local variables, parameters, return addresses</td></tr>
+              <tr><td>Heap Allocation</td><td>Arbitrary allocation/deallocation; dynamic memory management</td><td>malloc/new; objects with dynamic lifetime</td></tr>
+            </tbody>
+          </table>
+
+          <h3>6.6 Heap Management</h3>
+          <table>
+            <thead><tr><th>Strategy</th><th>Description</th><th>Issue</th></tr></thead>
+            <tbody>
+              <tr><td>First Fit</td><td>Allocate first block large enough</td><td>External fragmentation over time</td></tr>
+              <tr><td>Best Fit</td><td>Allocate smallest block that fits</td><td>Leaves many tiny fragments</td></tr>
+              <tr><td>Worst Fit</td><td>Allocate largest available block</td><td>Leaves large usable fragments; fewer tiny holes</td></tr>
+              <tr><td>Garbage Collection (GC)</td><td>Automatic reclamation of unreachable memory</td><td>GC pauses; overhead</td></tr>
+              <tr><td>Reference Counting</td><td>Track references; free when count=0</td><td>Cannot handle cycles</td></tr>
+            </tbody>
+          </table>
+
+          <div class="exam-box">
+            <p class="exam-label">🎯 IMPORTANT EXAM QUESTIONS</p>
+            <ul>
+              <li>Draw and explain the structure of an activation record (stack frame). (8 marks)</li>
+              <li>Explain different storage allocation strategies: static, stack, and heap. When is each used? (8 marks)</li>
+              <li>Explain Call by Value, Call by Reference, Call by Value-Result with examples. (10 marks)</li>
+              <li>What is a control link and an access link in activation records? Why is the access link needed? (6 marks)</li>
+              <li>Trace the stack frames for a recursive factorial function call fact(3). (8 marks)</li>
+            </ul>
+          </div>
+          <div class="revision-box">
+            <p class="revision-label">⚡ QUICK REVISION SUMMARY</p>
+            <ul>
+              <li>Memory layout: Code | Static | Heap (grows ↑) | Stack (grows ↓)</li>
+              <li>Activation Record fields: Return value, Parameters, Control Link, Access Link, Saved Registers, Locals, Temporaries</li>
+              <li>5 Parameter Passing: Value (copy), Reference (address), Value-Result, Name (substitution), Need (lazy)</li>
+              <li>Static: fixed at compile time | Stack: LIFO for function calls | Heap: dynamic lifetime (malloc/new)</li>
+              <li>GC: Mark-and-Sweep, Reference Counting (cannot handle cycles), Generational GC (Java/Python)</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ UNIT 7 -->
+        <section id="unit-7" class="topic">
+          <div class="topic-brand">
+            <div class="topic-brand-left">
+              <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+              <div>
+                <p class="topic-kicker">Diverse Loopers Crash Course Notes</p>
+                <p class="topic-note-title">Unit 7 revision sheet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-header">
+            <p class="unit-label">UNIT 7</p>
+            <h2>Code Optimisation</h2>
+            <p class="unit-topics">Loop • DAG • Peephole • Data Flow • CSE • Constant Folding • Dead Code</p>
+          </div>
+
+          <h3>7.1 Introduction</h3>
+          <p>Code Optimisation is the phase that transforms the intermediate code to produce equivalent code that runs faster, uses less memory, or consumes less energy — without changing the program's output. It is the <strong>most complex phase</strong> of a compiler.</p>
+          <div class="note">
+            <span class="box-label">📌 Key Principle:</span>
+            <p style="margin:0">Optimisation <strong>MUST</strong> preserve program semantics — the output of the optimised program must be identical to the original for all valid inputs.</p>
+          </div>
+          <table>
+            <thead><tr><th>Optimisation Type</th><th>Where Applied</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Local Optimisation</td><td>Within a Basic Block</td><td>Transformations within a straight-line code sequence; no branches</td></tr>
+              <tr><td>Global Optimisation</td><td>Within a Procedure</td><td>Transformations spanning multiple basic blocks within a function</td></tr>
+              <tr><td>Interprocedural</td><td>Across Procedures</td><td>Optimisations considering multiple functions together; inline expansion</td></tr>
+              <tr><td>Loop Optimisation</td><td>Within Loops</td><td>Critical — most execution time spent in loops; code motion, induction variables</td></tr>
+              <tr><td>Machine-Specific</td><td>Target Machine</td><td>Peephole, register allocation, instruction scheduling</td></tr>
+            </tbody>
+          </table>
+
+          <h3>7.2 Basic Blocks &amp; Flow Graphs</h3>
+          <table>
+            <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+            <tbody>
+              <tr><td>Basic Block</td><td>Maximal straight-line code sequence; single entry, single exit; no branches in the middle</td></tr>
+              <tr><td>Leader</td><td>First statement of a basic block; identified by: (1) first statement, (2) target of a branch, (3) statement after a branch</td></tr>
+              <tr><td>Flow Graph</td><td>A directed graph where nodes = basic blocks; edges = possible control flow between blocks</td></tr>
+              <tr><td>Predecessor</td><td>Block B is a predecessor of C if there is a flow graph edge B→C</td></tr>
+              <tr><td>Successor</td><td>Block C is a successor of B if there is a flow graph edge B→C</td></tr>
+            </tbody>
+          </table>
+
+          <h3>7.3 Local Optimisations (within Basic Blocks)</h3>
+          <table>
+            <thead><tr><th>Optimisation</th><th>Description</th><th>Example (Before → After)</th></tr></thead>
+            <tbody>
+              <tr><td>Constant Folding</td><td>Evaluate constant expressions at compile time</td><td><code>x = 2 * 3 + 4 → x = 10</code></td></tr>
+              <tr><td>Constant Propagation</td><td>Replace variable with its known constant value</td><td><code>x=5; y=x+3 → y=8</code></td></tr>
+              <tr><td>Common Subexpression Elimination (CSE)</td><td>Reuse already-computed value instead of recomputing</td><td><code>t1=a+b; t2=a+b → t1=a+b; t2=t1</code></td></tr>
+              <tr><td>Dead Code Elimination</td><td>Remove code whose results are never used</td><td><code>x=5; x=6; use(x) → x=6; use(x)</code></td></tr>
+              <tr><td>Algebraic Simplification</td><td>Apply algebraic identities to simplify</td><td><code>x = y * 1 → x = y</code></td></tr>
+              <tr><td>Strength Reduction (local)</td><td>Replace expensive operations with cheaper equivalents</td><td><code>x = y * 2 → x = y + y</code></td></tr>
+              <tr><td>Copy Propagation</td><td>Replace a copy x=y with uses of y directly</td><td><code>x=y; z=x+1 → z=y+1</code></td></tr>
+            </tbody>
+          </table>
+
+          <h3>7.4 Loop Optimisations</h3>
+          <p>Loops are the most critical targets for optimisation because code inside loops is executed repeatedly. Even small improvements yield large runtime gains.</p>
+          <table>
+            <thead><tr><th>Loop Optimisation</th><th>Description</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Loop-Invariant Code Motion</td><td>Move computation whose result doesn't change across iterations outside the loop</td><td><code>for(i=0;i&lt;n;i++) x=y*z+i</code> → precompute <code>t=y*z</code>; loop uses t</td></tr>
+              <tr><td>Induction Variable Elimination</td><td>Simplify computations on variables that change by constant amounts each iteration</td><td>Replace <code>j=4*i</code> (expensive multiply) with <code>j+=4</code> (cheap add)</td></tr>
+              <tr><td>Strength Reduction (Loop)</td><td>Replace multiply by induction var with cheaper addition</td><td><code>t1=4*i</code> in loop → t1 starts at 0, incremented by 4 each iteration</td></tr>
+              <tr><td>Loop Unrolling</td><td>Replicate loop body multiple times; reduces loop overhead</td><td><code>for(i=0;i&lt;4;i++) A[i]=0 → A[0]=0; A[1]=0; A[2]=0; A[3]=0</code></td></tr>
+              <tr><td>Loop Fusion</td><td>Combine two adjacent loops with same bounds into one</td><td>Reduces loop overhead; improves cache locality</td></tr>
+              <tr><td>Loop Interchange</td><td>Swap nested loop order for better memory access pattern</td><td>Improves cache efficiency for 2D array traversal</td></tr>
+            </tbody>
+          </table>
+          <div class="memory-box">
+            <span class="box-label">🧠 MEMORY TRICK:</span>
+            <p style="margin:0">'LISSU' — <strong>L</strong>oop-Invariant, <strong>I</strong>nduction vars, <strong>S</strong>trength reduction, <strong>S</strong>plit/fusion, <strong>U</strong>nrolling — 5 loop optimisations!</p>
+          </div>
+
+          <h3>7.5 Global Optimisations — Data Flow Analysis</h3>
+          <p>Data Flow Analysis computes properties of programs that hold at each program point, enabling global optimisations across basic blocks.</p>
+          <table>
+            <thead><tr><th>Analysis</th><th>Question Answered</th><th>Direction</th><th>Used For</th></tr></thead>
+            <tbody>
+              <tr><td>Reaching Definitions</td><td>Which definitions of variable x can reach this program point?</td><td>Forward</td><td>Constant propagation, copy propagation</td></tr>
+              <tr><td>Live Variable Analysis</td><td>Is variable x live (used in future) at this point?</td><td>Backward</td><td>Dead code elimination, register allocation</td></tr>
+              <tr><td>Available Expressions</td><td>Has expression x+y been computed and not since changed?</td><td>Forward</td><td>Global CSE</td></tr>
+              <tr><td>Very Busy Expressions</td><td>Will expression x+y definitely be used before being killed?</td><td>Backward</td><td>Code hoisting</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr><th>Key Sets</th><th>Definition</th></tr></thead>
+            <tbody>
+              <tr><td><code>GEN[B]</code></td><td>Set of definitions generated (created) within basic block B</td></tr>
+              <tr><td><code>KILL[B]</code></td><td>Set of definitions killed (overwritten) within basic block B</td></tr>
+              <tr><td><code>IN[B]</code></td><td>Data flow information at the entry of block B</td></tr>
+              <tr><td><code>OUT[B]</code></td><td>Data flow information at the exit of block B</td></tr>
+            </tbody>
+          </table>
+
+          <h3>7.6 Peephole Optimisation</h3>
+          <p>Peephole optimisation examines a small sliding window (the 'peephole') of the generated target code and replaces sequences with shorter or faster equivalents.</p>
+          <table>
+            <thead><tr><th>Category</th><th>Pattern</th><th>Optimised</th></tr></thead>
+            <tbody>
+              <tr><td>Redundant Load/Store</td><td><code>STORE X; LOAD X</code></td><td>Remove LOAD if X not changed</td></tr>
+              <tr><td>Unreachable Code</td><td><code>JUMP L1; [code between]; L1:</code></td><td>Remove unreachable code after jump</td></tr>
+              <tr><td>Flow of Control</td><td><code>JUMP L1; ... L1: JUMP L2</code></td><td>Replace with <code>JUMP L2</code> directly</td></tr>
+              <tr><td>Algebraic</td><td><code>x = x + 0</code> or <code>x = x * 1</code></td><td>Remove the instruction entirely</td></tr>
+              <tr><td>Strength Reduction</td><td><code>x = x * 2</code></td><td>Replace with <code>x = x + x</code> or <code>x = x &lt;&lt; 1</code></td></tr>
+              <tr><td>Null Operations</td><td>JUMP to next instruction</td><td>Remove jump</td></tr>
+            </tbody>
+          </table>
+
+          <div class="exam-box">
+            <p class="exam-label">🎯 IMPORTANT EXAM QUESTIONS</p>
+            <ul>
+              <li>What is code optimisation? Explain different types of optimisations with examples. (10 marks)</li>
+              <li>Explain loop-invariant code motion and induction variable elimination with examples. (10 marks)</li>
+              <li>What is a basic block? How is a flow graph constructed from intermediate code? (8 marks)</li>
+              <li>Explain: (a) Constant Folding (b) Common Subexpression Elimination (c) Dead Code Elimination. (10 marks)</li>
+              <li>Explain Peephole Optimisation with at least 4 types of improvements. (8 marks)</li>
+              <li>What is Data Flow Analysis? Explain Reaching Definitions and Live Variable Analysis. (10 marks)</li>
+            </ul>
+          </div>
+          <div class="revision-box">
+            <p class="revision-label">⚡ QUICK REVISION SUMMARY</p>
+            <ul>
+              <li>Optimisation must preserve semantics; transforms code to run faster/use less memory</li>
+              <li>Types: Local (basic block), Global (procedure), Loop (inside loops), Machine-specific (target)</li>
+              <li>Basic Block: Straight-line code; single entry, single exit; leader = first statement</li>
+              <li>Local opts: Constant Folding, Propagation, CSE, Dead Code Elimination, Algebraic Simplification</li>
+              <li>Loop opts (LISSU): Loop-Invariant code motion, Induction vars, Strength Reduction, Fusion, Unrolling</li>
+              <li>Data Flow: Reaching Defs (forward), Live Variables (backward), Available Exprs (forward), Very Busy (backward)</li>
+              <li>Peephole: Small window on target code; removes redundant loads/stores, unreachable code, algebraic identities</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════ UNIT 8 -->
+        <section id="unit-8" class="topic">
+          <div class="topic-brand">
+            <div class="topic-brand-left">
+              <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+              <div>
+                <p class="topic-kicker">Diverse Loopers Crash Course Notes</p>
+                <p class="topic-note-title">Unit 8 revision sheet</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="unit-header">
+            <p class="unit-label">UNIT 8</p>
+            <h2>Code Generation</h2>
+            <p class="unit-topics">Target Code • Register Allocation • Instruction Selection • Basic Block Code Gen</p>
+          </div>
+
+          <h3>8.1 Introduction</h3>
+          <p>Code Generation is the <strong>final phase</strong> of the compiler. It translates the (optimised) intermediate representation into target machine code. The target is usually assembly language or machine code for a specific architecture.</p>
+          <div class="note">
+            <span class="box-label">📌 Code Generator:</span>
+            <p style="margin:0">Takes an IR as input and produces target code. Must correctly map IR operations to machine instructions, allocate registers, and manage memory access.</p>
+          </div>
+          <table>
+            <thead><tr><th>Code Generator Issue</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Instruction Selection</td><td>Choose the best machine instructions to implement each IR operation; one IR op may map to several choices</td></tr>
+              <tr><td>Register Allocation</td><td>Decide which values to keep in registers; registers are scarce, fast resources</td></tr>
+              <tr><td>Register Assignment</td><td>Assign specific hardware registers to values chosen for register storage</td></tr>
+              <tr><td>Evaluation Order</td><td>The order in which computations are performed affects register usage and efficiency</td></tr>
+            </tbody>
+          </table>
+
+          <h3>8.2 Target Machine Model</h3>
+          <p>For our discussion, we use a simple register machine model with n general-purpose registers R0, R1, ..., Rn-1.</p>
+          <table>
+            <thead><tr><th>Instruction Class</th><th>Format</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Load</td><td><code>LD Ri, M</code></td><td>Load from memory M into register Ri</td></tr>
+              <tr><td>Store</td><td><code>ST M, Ri</code></td><td>Store from register Ri into memory location M</td></tr>
+              <tr><td>Computation</td><td><code>OP Ri, Rj, Rk</code></td><td>Ri = Rj OP Rk (e.g., ADD R1, R2, R3)</td></tr>
+              <tr><td>Unconditional Branch</td><td><code>BR L</code></td><td>Jump to label L</td></tr>
+              <tr><td>Conditional Branch</td><td><code>BCond Ri, L</code></td><td>Jump to L if Ri satisfies condition</td></tr>
+              <tr><td>Indexed Address</td><td><code>LD Ri, a(Rj)</code></td><td>Ri = Memory[a + Rj] (array access)</td></tr>
+            </tbody>
+          </table>
+
+          <h3>8.3 Instruction Selection</h3>
+          <table>
+            <thead><tr><th>IR Operation</th><th>Naive Target Code</th><th>Better Target Code</th></tr></thead>
+            <tbody>
+              <tr><td><code>a = b + c</code></td><td><code>LD R0,b / LD R1,c / ADD R0,R0,R1 / ST a,R0</code></td><td>If b in register: <code>ADD Rb, Rb, c</code> (3 instr → 1)</td></tr>
+              <tr><td><code>a = b * 8</code></td><td><code>LD R0,b / MUL R0,R0,#8 / ST a,R0</code></td><td><code>LD R0,b / SHL R0,R0,#3 / ST a,R0</code> (shift is faster)</td></tr>
+              <tr><td><code>a = a + 1</code></td><td><code>LD R0,a / ADD R0,R0,#1 / ST a,R0</code></td><td><code>INC a</code> (single instruction on some architectures)</td></tr>
+              <tr><td><code>a = -b</code></td><td><code>LD R0,b / NEG R0 / ST a,R0</code></td><td>Direct NEG instruction if available</td></tr>
+            </tbody>
+          </table>
+
+          <h3>8.4 Register Allocation &amp; Assignment</h3>
+          <p>Registers are the fastest storage but are limited in number. Good register allocation is critical to performance — memory accesses are <strong>100x slower</strong> than register operations.</p>
+          <table>
+            <thead><tr><th>Concept</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Register Allocation</td><td>Decide which program variables/temporaries should be kept in registers at each point</td></tr>
+              <tr><td>Register Assignment</td><td>Decide which specific register (R0, R1, ...) holds each allocated value</td></tr>
+              <tr><td>Spilling</td><td>When all registers are full, a value is written to memory (spilled) to free a register</td></tr>
+              <tr><td>Live Variable Analysis</td><td>Used to determine which values still need to be in registers; dead values can be evicted</td></tr>
+              <tr><td>Graph Colouring</td><td>Model allocation as graph colouring; variables are nodes, edges for conflicts; colours = registers</td></tr>
+            </tbody>
+          </table>
+
+          <h4>8.4.1 Register Allocation using Graph Colouring</h4>
+          <p>Chaitin's algorithm uses interference graphs for register allocation:</p>
+          <table>
+            <thead><tr><th>Step</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>1. Build Interference Graph</td><td>Nodes = variables/temporaries; add edge between x and y if both live at same point</td></tr>
+              <tr><td>2. Colouring Attempt</td><td>Try to colour graph with k colours (k = number of registers); no adjacent nodes share colour</td></tr>
+              <tr><td>3. If k-colourable</td><td>Register assignment is: variable's colour = assigned register</td></tr>
+              <tr><td>4. If not k-colourable</td><td>Select a variable to spill to memory; remove node; retry colouring</td></tr>
+              <tr><td>5. Assign Registers</td><td>Map each colour to an actual hardware register</td></tr>
+            </tbody>
+          </table>
+
+          <h3>8.5 Code Generation for Basic Blocks — getReg Algorithm</h3>
+          <p>The getReg algorithm (from Aho et al.) decides which register to use for each operand in a TAC instruction within a basic block.</p>
+          <table>
+            <thead><tr><th>Descriptor</th><th>Records</th></tr></thead>
+            <tbody>
+              <tr><td>Register Descriptor</td><td>Which values are currently in each register</td></tr>
+              <tr><td>Address Descriptor</td><td>Where each variable's current value can be found (register, memory, or both)</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr><th>Step</th><th>getReg Logic</th></tr></thead>
+            <tbody>
+              <tr><td>1. Check address descriptor</td><td>If the required value is already in a register, use that register</td></tr>
+              <tr><td>2. Find free register</td><td>If a register is free (not holding any live value), allocate it</td></tr>
+              <tr><td>3. Spill a register</td><td>If no free register, choose a register whose value is (a) not live after this block, or (b) also in memory; spill if needed</td></tr>
+              <tr><td>4. Update descriptors</td><td>After each instruction, update both register descriptors and address descriptors</td></tr>
+            </tbody>
+          </table>
+          <div class="insight-box">
+            <span class="box-label">💡 Solved Example — Code Gen for <code>d = (a - b) + (a - c)</code>:</span>
+            <p style="margin:4px 0 0">TAC: <code>t1=a-b; t2=a-c; d=t1+t2</code></p>
+            <p style="margin:4px 0 0">Code: <code>LD R0,a / LD R1,b / SUB R0,R0,R1</code> [R0=t1] <code>/ LD R1,c / SUB R1,R0,R1</code> [R1=t2, R0=a-b reused!] <code>/ ADD R0,R0,R1</code> [R0=d] <code>/ ST d,R0</code></p>
+          </div>
+
+          <h3>8.6 Special Considerations in Code Generation</h3>
+          <table>
+            <thead><tr><th>Topic</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Instruction Scheduling</td><td>Reorder instructions to minimise pipeline stalls; must respect data dependencies</td></tr>
+              <tr><td>Calling Conventions</td><td>Rules for how functions pass arguments/return values (caller-save vs callee-save registers)</td></tr>
+              <tr><td>Inline Expansion</td><td>Replace function call with function body; eliminates call overhead but increases code size</td></tr>
+              <tr><td>Branch Delay Slots</td><td>RISC processors: instruction after branch always executes; schedule useful work there</td></tr>
+              <tr><td>SIMD/Vector Instructions</td><td>Use vector instructions (SSE, AVX) to process multiple data elements in parallel</td></tr>
+            </tbody>
+          </table>
+
+          <div class="exam-box">
+            <p class="exam-label">🎯 IMPORTANT EXAM QUESTIONS</p>
+            <ul>
+              <li>What are the main issues in code generation? Explain each briefly. (8 marks)</li>
+              <li>Describe the register allocation algorithm using graph colouring. (10 marks)</li>
+              <li>Generate target code for: <code>a = b + c; d = a - e;</code> using register/address descriptor approach. (10 marks)</li>
+              <li>What is instruction selection? Show how different machine instructions can implement the same IR operation. (8 marks)</li>
+              <li>Explain register spilling. When does it occur and how is it handled? (6 marks)</li>
+              <li>Describe the getReg algorithm for code generation in a basic block. (8 marks)</li>
+            </ul>
+          </div>
+          <div class="revision-box">
+            <p class="revision-label">⚡ QUICK REVISION SUMMARY</p>
+            <ul>
+              <li>Code Gen: 3 main issues — Instruction Selection, Register Allocation, Register Assignment</li>
+              <li>Instruction Selection: Map IR ops to machine instructions; strength reduction (multiply→shift)</li>
+              <li>Register Allocation: Decide which values live in registers | Assignment: Which specific register</li>
+              <li>Spilling: When all registers full — write value to memory; reload when needed (expensive!)</li>
+              <li>Graph Colouring: Interference graph; k-colouring where k = #registers; spill if not k-colourable</li>
+              <li>getReg: Maintain address descriptors (where value is) + register descriptors (what's in register)</li>
+              <li>Modern compilers: LLVM uses SSA + sophisticated register allocation; GCC uses Chaitin's colouring</li>
+            </ul>
+          </div>
+        </section>
+
+      </article>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>Diverse Loopers — Compiler Design Complete B.Tech Study Notes. All 8 Units covered. — <em>Nada Khan</em></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DAA Crash Course - Diverse Loopers</title>
+  <style>
+    :root {
+      --logo: url("data:image/jpeg;base64,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");
+      --green: #0f9d58;
+      --green-dark: #0b6b3a;
+      --green-soft: #e8f6ef;
+      --slate: #1f2933;
+      --muted: #52606d;
+      --border: #d9e2ec;
+      --bg: #f7fafc;
+      --white: #ffffff;
+      --code-bg: #111827;
+      --code-border: #263244;
+      --code-text: #e5e7eb;
+      --blue-soft: #edf4ff;
+      --blue-border: #bcd4ff;
+      --warn: #fff7d6;
+      --warn-border: #f2c94c;
+      --shadow: 0 12px 30px rgba(31, 41, 51, 0.08);
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--slate);
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .logo {
+      width: 64px;
+      height: 64px;
+      flex: 0 0 auto;
+      background: var(--logo) center / contain no-repeat var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+    .site-header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand, .topic-brand-left, .print-brand { display: flex; align-items: center; gap: 14px; }
+    .brand-title { margin: 0; color: var(--slate); font-size: 1.16rem; font-weight: 850; line-height: 1.15; }
+    .brand-subtitle { margin: 3px 0 0; color: var(--muted); font-size: 0.9rem; }
+    .header-badge {
+      color: var(--green-dark);
+      background: var(--green-soft);
+      border: 1px solid #c7ebd8;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 0.86rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+    .page-shell {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 28px;
+      padding: 24px;
+    }
+    .toc {
+      position: sticky;
+      top: 92px;
+      align-self: start;
+      height: calc(100vh - 116px);
+      overflow: auto;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .toc h2 {
+      margin: 0 0 12px;
+      color: var(--slate);
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .toc-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    .toc-list a {
+      display: block;
+      padding: 10px 12px;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      color: var(--muted);
+      background: #fbfdff;
+      font-size: 0.94rem;
+      line-height: 1.35;
+    }
+    .toc-list a:hover, .toc-list a:focus {
+      color: var(--green-dark);
+      background: var(--green-soft);
+      border-color: #c7ebd8;
+      outline: none;
+    }
+    .main-content { min-width: 0; max-width: 1120px; }
+    .course-hero, section.topic {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .course-hero {
+      padding: 30px;
+      margin-bottom: 24px;
+      border-left: 6px solid var(--green);
+    }
+    .course-hero h1 {
+      margin: 0 0 10px;
+      color: var(--slate);
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .course-hero p { margin: 0; max-width: 900px; color: var(--muted); font-size: 1.05rem; }
+    article { display: grid; gap: 24px; }
+    section.topic { scroll-margin-top: 104px; padding: 28px; }
+    .topic-brand {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      padding-bottom: 16px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .topic-kicker { margin: 0; color: var(--green-dark); font-size: 0.8rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.08em; }
+    .topic-note-title { margin: 2px 0 0; color: var(--muted); font-size: 0.92rem; }
+    h2 { margin: 0 0 12px; color: var(--green-dark); font-size: 1.9rem; line-height: 1.22; letter-spacing: 0; }
+    h3 { margin: 28px 0 10px; color: var(--slate); font-size: 1.35rem; line-height: 1.25; letter-spacing: 0; }
+    h4 { margin: 22px 0 8px; color: var(--slate); font-size: 1.08rem; }
+    p { margin: 0 0 12px; }
+    ul, ol { padding-left: 22px; }
+    li + li { margin-top: 5px; }
+    .lead { color: var(--muted); font-size: 1.05rem; margin-top: 0; }
+    .concept-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin: 18px 0; }
+    .concept-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; background: #fbfdff; }
+    .concept-card h4 { margin-top: 0; }
+    .note, .formula-box, .proof-box, .warning, .question-box { margin: 18px 0; padding: 14px 16px; border-radius: 6px; }
+    .note { border-left: 4px solid var(--green); background: var(--green-soft); }
+    .formula-box { border-left: 4px solid var(--green-dark); background: #fbfffd; border-top: 1px solid #d6f0e1; border-right: 1px solid #d6f0e1; border-bottom: 1px solid #d6f0e1; }
+    .proof-box { border-left: 4px solid #2563eb; background: var(--blue-soft); border-top: 1px solid var(--blue-border); border-right: 1px solid var(--blue-border); border-bottom: 1px solid var(--blue-border); }
+    .warning { border-left: 4px solid var(--warn-border); background: var(--warn); }
+    .question-box { border-left: 4px solid #7c3aed; background: #f5f3ff; border-top: 1px solid #ddd6fe; border-right: 1px solid #ddd6fe; border-bottom: 1px solid #ddd6fe; }
+    .box-label { display: inline-block; margin-bottom: 6px; color: var(--slate); font-weight: 850; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; overflow: hidden; border-radius: var(--radius); border: 1px solid var(--border); font-size: 0.95rem; }
+    th, td { padding: 12px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+    th { background: var(--green-soft); color: var(--green-dark); font-weight: 800; }
+    tr:last-child td { border-bottom: 0; }
+    pre {
+      margin: 16px 0;
+      padding: 16px;
+      overflow: auto;
+      color: var(--code-text);
+      background: var(--code-bg);
+      border: 1px solid var(--code-border);
+      border-radius: var(--radius);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+    code { font-family: "Cascadia Code", "Fira Code", Consolas, Monaco, monospace; font-size: 0.92rem; }
+    :not(pre) > code { background: var(--green-soft); color: var(--green-dark); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+    details { margin: 18px 0; border: 1px solid var(--border); border-radius: var(--radius); background: #fbfdff; overflow: hidden; }
+    summary { cursor: pointer; padding: 14px 16px; color: var(--slate); background: #f3f7fa; font-weight: 800; border-bottom: 1px solid transparent; }
+    details[open] summary { border-bottom-color: var(--border); }
+    .details-body { padding: 16px; }
+    .diagram { margin: 18px 0; padding: 16px; overflow-x: auto; background: #fbfdff; border: 1px solid var(--border); border-radius: var(--radius); }
+    .flow-row { display: flex; align-items: center; gap: 10px; min-width: max-content; }
+    .flow-box { min-width: 120px; padding: 10px 14px; text-align: center; font-weight: 800; background: var(--white); border: 2px solid var(--green); border-radius: 6px; }
+    .flow-arrow { color: var(--green-dark); font-weight: 900; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .pill { border: 1px solid #c7ebd8; background: var(--green-soft); color: var(--green-dark); border-radius: 999px; padding: 5px 10px; font-size: 0.88rem; font-weight: 800; }
+    .complexity-tag { display: inline-block; color: var(--green-dark); background: var(--green-soft); border: 1px solid #c7ebd8; border-radius: 6px; padding: 2px 7px; font-family: "Cascadia Code", Consolas, monospace; font-size: 0.88rem; font-weight: 800; }
+    .dp-table td { text-align: center; font-family: "Cascadia Code", Consolas, monospace; }
+    .site-footer { max-width: 1440px; margin: 0 auto; padding: 22px 24px 34px; color: var(--muted); font-size: 0.9rem; }
+    .print-brand { display: none; }
+    @media (max-width: 980px) {
+      .site-header { position: relative; }
+      .site-header-inner { align-items: flex-start; flex-direction: column; }
+      .header-badge { white-space: normal; }
+      .page-shell { grid-template-columns: 1fr; padding: 16px; }
+      .toc { position: relative; top: auto; height: auto; }
+      .toc-list { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 700px) {
+      .toc-list, .concept-grid { grid-template-columns: 1fr; }
+      .course-hero, section.topic { padding: 20px; }
+      .topic-brand { align-items: flex-start; flex-direction: column; }
+      th, td { padding: 10px; }
+    }
+    @media print {
+      @page { margin: 22mm 12mm 16mm; }
+      body { background: var(--white); }
+      .site-header, .toc { display: none; }
+      .print-brand {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 17mm;
+        background: #fff;
+        border-bottom: 1px solid #ccc;
+        z-index: 100;
+        font-size: 10pt;
+        font-weight: 800;
+        color: var(--slate);
+      }
+      .print-brand .logo { width: 40px; height: 40px; }
+      .page-shell { display: block; padding: 0; }
+      .course-hero, section.topic { box-shadow: none; break-inside: avoid; }
+      pre { white-space: pre-wrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-brand">
+    <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+    <span>Diverse Loopers Crash Course Notes - DAA Crash Course</span>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="brand">
+        <div class="logo" role="img" aria-label="Diverse Loopers logo"></div>
+        <div>
+          <p class="brand-title">DAA Crash Course</p>
+          <p class="brand-subtitle">Diverse Loopers Crash Course Notes</p>
+        </div>
+      </div>
+      <div class="header-badge">GeeksforGeeks-inspired DAA curriculum</div>
+    </div>
+  </header>
+
+  <div class="page-shell">
+    <aside class="toc" aria-label="Table of contents">
+      <nav>
+        <h2>Table of Contents</h2>
+        <ol class="toc-list">
+          <li><a href="#topic-1">Topic 1: Analysis, Asymptotic Notations &amp; Recurrences</a></li>
+          <li><a href="#topic-2">Topic 2: Divide and Conquer</a></li>
+          <li><a href="#topic-3">Topic 3: Greedy Algorithms</a></li>
+          <li><a href="#topic-4">Topic 4: Dynamic Programming</a></li>
+          <li><a href="#topic-5">Topic 5: Backtracking &amp; Branch and Bound</a></li>
+          <li><a href="#topic-6">Topic 6: Complexity Theory</a></li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="course-hero">
+        <h1>DAA Crash Course</h1>
+        <p>
+          A single-page Design and Analysis of Algorithms guide covering algorithm analysis,
+          recurrences, divide and conquer, greedy design, dynamic programming, search-based methods,
+          and complexity classes with proofs, tables, and working code.
+        </p>
+      </header>
+
+      <article>
+        <section id="topic-1" class="topic">
+          <div class="topic-brand"><div class="topic-brand-left"><div class="logo" role="img" aria-label="Diverse Loopers logo"></div><div><p class="topic-kicker">Diverse Loopers Crash Course Notes</p><p class="topic-note-title">Topic 1 revision sheet</p></div></div></div>
+          <h2>Topic 1: Algorithm Analysis, Asymptotic Notations &amp; Recurrences</h2>
+          <p class="lead">Algorithm analysis measures how running time and memory grow with input size. DAA focuses on machine-independent growth, not stopwatch time.</p>
+
+          <div class="concept-grid">
+            <div class="concept-card"><h4>Algorithm</h4><p>A finite, unambiguous sequence of steps that converts valid input into required output and terminates.</p></div>
+            <div class="concept-card"><h4>Why Analysis Matters</h4><p>For large inputs, an <code>O(n log n)</code> design often beats an <code>O(n^2)</code> design even on slower hardware.</p></div>
+          </div>
+
+          <h3>Types of Case Analysis</h3>
+          <table>
+            <thead><tr><th>Case</th><th>Meaning</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>Best case</td><td>Minimum work over inputs of size <code>n</code>.</td><td>Linear search finds the key at index 0: <code>O(1)</code>.</td></tr>
+              <tr><td>Average case</td><td>Expected work over a probability distribution of inputs.</td><td>Expected successful linear search: about <code>n/2</code> comparisons.</td></tr>
+              <tr><td>Worst case</td><td>Maximum work over inputs of size <code>n</code>.</td><td>Linear search misses the key: <code>O(n)</code>.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Asymptotic Notations</h3>
+          <table>
+            <thead><tr><th>Notation</th><th>Formal Meaning</th><th>Interpretation</th></tr></thead>
+            <tbody>
+              <tr><td><code>O(g(n))</code></td><td><code>0 <= f(n) <= c g(n)</code> for all large <code>n</code>.</td><td>Upper bound, commonly worst-case bound.</td></tr>
+              <tr><td><code>Omega(g(n))</code></td><td><code>0 <= c g(n) <= f(n)</code> for all large <code>n</code>.</td><td>Lower bound.</td></tr>
+              <tr><td><code>Theta(g(n))</code></td><td><code>c1 g(n) <= f(n) <= c2 g(n)</code> for all large <code>n</code>.</td><td>Tight bound.</td></tr>
+              <tr><td><code>o(g(n))</code></td><td><code>f(n)/g(n) -> 0</code>.</td><td>Strictly smaller growth.</td></tr>
+              <tr><td><code>omega(g(n))</code></td><td><code>f(n)/g(n) -> infinity</code>.</td><td>Strictly larger growth.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="formula-box">
+            <span class="box-label">Common Growth Order:</span>
+            <p><code>O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n^2) &lt; O(n^3) &lt; O(2^n) &lt; O(n!)</code></p>
+          </div>
+
+          <h3>Loop Analysis Patterns</h3>
+          <table>
+            <thead><tr><th>Code Shape</th><th>Count</th><th>Complexity</th></tr></thead>
+            <tbody>
+              <tr><td><code>for i = 1 to n</code></td><td><code>n</code></td><td><code>O(n)</code></td></tr>
+              <tr><td>Nested loops each to <code>n</code></td><td><code>n * n</code></td><td><code>O(n^2)</code></td></tr>
+              <tr><td><code>for(i=1; i&lt;n; i*=2)</code></td><td><code>log2 n</code></td><td><code>O(log n)</code></td></tr>
+              <tr><td><code>for(i=n; i&gt;0; i/=2) inner j=1..i</code></td><td><code>n+n/2+n/4+... &lt; 2n</code></td><td><code>O(n)</code></td></tr>
+            </tbody>
+          </table>
+
+          <h3>Recurrence Relations</h3>
+          <p>A recurrence expresses the running time of a recursive algorithm in terms of smaller inputs.</p>
+          <table>
+            <thead><tr><th>Algorithm</th><th>Recurrence</th><th>Solution</th></tr></thead>
+            <tbody>
+              <tr><td>Binary Search</td><td><code>T(n)=T(n/2)+O(1)</code></td><td><code>O(log n)</code></td></tr>
+              <tr><td>Merge Sort</td><td><code>T(n)=2T(n/2)+O(n)</code></td><td><code>O(n log n)</code></td></tr>
+              <tr><td>Naive Fibonacci</td><td><code>T(n)=T(n-1)+T(n-2)+O(1)</code></td><td><code>O(phi^n)</code></td></tr>
+              <tr><td>Strassen</td><td><code>T(n)=7T(n/2)+O(n^2)</code></td><td><code>O(n^log2 7) approx O(n^2.807)</code></td></tr>
+            </tbody>
+          </table>
+
+          <h3>Master Theorem</h3>
+          <div class="formula-box">
+            <span class="box-label">For <code>T(n)=aT(n/b)+f(n)</code>:</span>
+            <ul>
+              <li>If <code>f(n)=O(n^(log_b a - epsilon))</code>, then <code>T(n)=Theta(n^log_b a)</code>.</li>
+              <li>If <code>f(n)=Theta(n^log_b a log^k n)</code>, then <code>T(n)=Theta(n^log_b a log^(k+1)n)</code>.</li>
+              <li>If <code>f(n)=Omega(n^(log_b a + epsilon))</code> and regularity holds, then <code>T(n)=Theta(f(n))</code>.</li>
+            </ul>
+          </div>
+
+          <details>
+            <summary>Show recurrence tree proof for Merge Sort</summary>
+            <div class="details-body">
+              <p><code>T(n)=2T(n/2)+cn</code>. At level 0 cost is <code>cn</code>. At level 1 there are 2 subproblems of size <code>n/2</code>, total cost <code>2*c(n/2)=cn</code>. At level <code>i</code>, total combine cost remains <code>cn</code>. Number of levels is <code>log2 n</code>. Leaves contribute <code>n*T(1)=O(n)</code>. Therefore <code>T(n)=cn log2 n + O(n)=Theta(n log n)</code>.</p>
+            </div>
+          </details>
+
+          <h3>Practice Questions with Solutions</h3>
+          <div class="question-box">
+            <span class="box-label">Question 1:</span>
+            <p>Find the asymptotic complexity of <code>f(n)=5n^2+30n log n+200</code>.</p>
+            <p><strong>Solution:</strong> The highest-order term is <code>5n^2</code>. Constants and lower-order terms are ignored asymptotically, so <code>f(n)=Theta(n^2)</code>.</p>
+          </div>
+          <div class="question-box">
+            <span class="box-label">Question 2:</span>
+            <p>Solve <code>T(n)=3T(n/2)+n</code> using Master Theorem.</p>
+            <p><strong>Solution:</strong> Here <code>a=3</code>, <code>b=2</code>, so <code>n^log_b a = n^log_2 3 approx n^1.585</code>. Since <code>f(n)=n=O(n^(1.585-epsilon))</code>, case 1 applies. Thus <code>T(n)=Theta(n^log_2 3)</code>.</p>
+          </div>
+        </section>
+
+        <section id="topic-2" class="topic">
+          <div class="topic-brand"><div class="topic-brand-left"><div class="logo" role="img" aria-label="Diverse Loopers logo"></div><div><p class="topic-kicker">Diverse Loopers Crash Course Notes</p><p class="topic-note-title">Topic 2 revision sheet</p></div></div></div>
+          <h2>Topic 2: Divide and Conquer</h2>
+          <p class="lead">Divide and conquer solves a problem by dividing it into smaller independent subproblems, solving them recursively, and combining their answers.</p>
+          <div class="diagram"><div class="flow-row"><div class="flow-box">Divide</div><div class="flow-arrow">-&gt;</div><div class="flow-box">Conquer</div><div class="flow-arrow">-&gt;</div><div class="flow-box">Combine</div></div></div>
+
+          <h3>Merge Sort</h3>
+          <p>Merge Sort divides the array into halves, sorts each half recursively, and merges sorted halves in linear time. It is stable and has predictable <code>O(n log n)</code> time.</p>
+          <table>
+            <thead><tr><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable?</th></tr></thead>
+            <tbody><tr><td><code>O(n log n)</code></td><td><code>O(n log n)</code></td><td><code>O(n log n)</code></td><td><code>O(n)</code></td><td>Yes</td></tr></tbody>
+          </table>
+          <details>
+            <summary>Show C Merge Sort</summary>
+            <div class="details-body">
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void mergeParts(int a[], int temp[], int l, int m, int r) {
+    int i = l, j = m + 1, k = l;
+
+    while (i &lt;= m &amp;&amp; j &lt;= r) {
+        if (a[i] &lt;= a[j]) temp[k++] = a[i++];
+        else temp[k++] = a[j++];
+    }
+    while (i &lt;= m) temp[k++] = a[i++];
+    while (j &lt;= r) temp[k++] = a[j++];
+
+    for (i = l; i &lt;= r; i++) {
+        a[i] = temp[i];
+    }
+}
+
+void mergeSort(int a[], int temp[], int l, int r) {
+    if (l &gt;= r) return;
+    int m = l + (r - l) / 2;
+    mergeSort(a, temp, l, m);
+    mergeSort(a, temp, m + 1, r);
+    mergeParts(a, temp, l, m, r);
+}</code></pre>
+            </div>
+          </details>
+
+          <h3>Quick Sort</h3>
+          <p>Quick Sort partitions the array around a pivot, then recursively sorts left and right partitions. It is usually fast in practice, but poor pivot choices cause quadratic worst case.</p>
+          <table>
+            <thead><tr><th>Best</th><th>Average</th><th>Worst</th><th>Space</th><th>Stable?</th></tr></thead>
+            <tbody><tr><td><code>O(n log n)</code></td><td><code>O(n log n)</code></td><td><code>O(n^2)</code></td><td><code>O(log n)</code> average recursion</td><td>No</td></tr></tbody>
+          </table>
+          <details>
+            <summary>Show C Quick Sort partition logic</summary>
+            <div class="details-body">
+<pre><code class="language-c">void swap(int *x, int *y) {
+    int t = *x;
+    *x = *y;
+    *y = t;
+}
+
+int partition(int a[], int low, int high) {
+    int pivot = a[high];
+    int i = low - 1;
+    for (int j = low; j &lt; high; j++) {
+        if (a[j] &lt;= pivot) {
+            i++;
+            swap(&amp;a[i], &amp;a[j]);
+        }
+    }
+    swap(&amp;a[i + 1], &amp;a[high]);
+    return i + 1;
+}
+
+void quickSort(int a[], int low, int high) {
+    if (low &lt; high) {
+        int p = partition(a, low, high);
+        quickSort(a, low, p - 1);
+        quickSort(a, p + 1, high);
+    }
+}</code></pre>
+            </div>
+          </details>
+
+          <h3>Strassen's Matrix Multiplication</h3>
+          <p>Classical matrix multiplication uses 8 recursive multiplications for 2x2 block matrices. Strassen reduces this to 7 multiplications using extra additions/subtractions.</p>
+          <div class="formula-box">
+            <span class="box-label">Complexity:</span>
+            <p>Classical divide-and-conquer: <code>T(n)=8T(n/2)+O(n^2)=O(n^3)</code>. Strassen: <code>T(n)=7T(n/2)+O(n^2)=O(n^log2 7) approx O(n^2.807)</code>.</p>
+          </div>
+          <details>
+            <summary>Show Strassen 2x2 formula set</summary>
+            <div class="details-body">
+              <p>For block matrices <code>A=[A11 A12; A21 A22]</code> and <code>B=[B11 B12; B21 B22]</code>:</p>
+              <pre><code>M1=(A11+A22)(B11+B22)
+M2=(A21+A22)B11
+M3=A11(B12-B22)
+M4=A22(B21-B11)
+M5=(A11+A12)B22
+M6=(A21-A11)(B11+B12)
+M7=(A12-A22)(B21+B22)
+
+C11=M1+M4-M5+M7
+C12=M3+M5
+C21=M2+M4
+C22=M1-M2+M3+M6</code></pre>
+            </div>
+          </details>
+
+          <h3>Practice Questions with Solutions</h3>
+          <div class="question-box">
+            <span class="box-label">Question 1:</span>
+            <p>Why is Merge Sort <code>O(n log n)</code> in all cases?</p>
+            <p><strong>Solution:</strong> Merge Sort always splits into two halves until single elements are reached, creating <code>log n</code> levels. At each level, merging all subarrays costs total <code>O(n)</code>. Therefore total time is <code>O(n log n)</code> regardless of input order.</p>
+          </div>
+          <div class="question-box">
+            <span class="box-label">Question 2:</span>
+            <p>When does Quick Sort become <code>O(n^2)</code>?</p>
+            <p><strong>Solution:</strong> If each pivot creates partitions of sizes <code>0</code> and <code>n-1</code>, the recurrence becomes <code>T(n)=T(n-1)+O(n)</code>, whose sum is <code>n+(n-1)+...+1=O(n^2)</code>.</p>
+          </div>
+        </section>
+
+        <section id="topic-3" class="topic">
+          <div class="topic-brand"><div class="topic-brand-left"><div class="logo" role="img" aria-label="Diverse Loopers logo"></div><div><p class="topic-kicker">Diverse Loopers Crash Course Notes</p><p class="topic-note-title">Topic 3 revision sheet</p></div></div></div>
+          <h2>Topic 3: Greedy Algorithms</h2>
+          <p class="lead">Greedy algorithms make the locally best choice at each step. They are correct only when the problem has greedy-choice property and optimal substructure.</p>
+          <div class="warning"><strong>Exam warning:</strong> Greedy is not automatically correct. Coin change with arbitrary denominations and 0/1 knapsack are classic traps.</div>
+
+          <h3>Fractional Knapsack</h3>
+          <p>Items can be broken into fractions. Sort by value/weight ratio and take highest ratios first.</p>
+          <table><thead><tr><th>Strategy</th><th>Correctness Idea</th><th>Time</th><th>Space</th></tr></thead><tbody><tr><td>Sort by density</td><td>Exchange argument: replacing lower density weight with higher density weight never hurts value.</td><td><code>O(n log n)</code></td><td><code>O(1)</code> or sort space</td></tr></tbody></table>
+          <details><summary>Show C Fractional Knapsack</summary><div class="details-body">
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct {
+    int value;
+    int weight;
+} Item;
+
+int compareDensity(const void *p, const void *q) {
+    Item *a = (Item *)p;
+    Item *b = (Item *)q;
+    double r1 = (double)a-&gt;value / a-&gt;weight;
+    double r2 = (double)b-&gt;value / b-&gt;weight;
+    if (r1 &lt; r2) return 1;
+    if (r1 &gt; r2) return -1;
+    return 0;
+}
+
+double fractionalKnapsack(Item items[], int n, int capacity) {
+    qsort(items, n, sizeof(Item), compareDensity);
+    double answer = 0.0;
+
+    for (int i = 0; i &lt; n &amp;&amp; capacity &gt; 0; i++) {
+        int take = items[i].weight &lt; capacity ? items[i].weight : capacity;
+        answer += take * ((double)items[i].value / items[i].weight);
+        capacity -= take;
+    }
+    return answer;
+}</code></pre>
+          </div></details>
+
+          <h3>Huffman Coding</h3>
+          <p>Huffman Coding builds an optimal prefix code by repeatedly merging two least frequent nodes. Frequent characters get shorter codes.</p>
+          <table><thead><tr><th>Data Structure</th><th>Correctness Idea</th><th>Time</th><th>Space</th></tr></thead><tbody><tr><td>Min-heap</td><td>In an optimal prefix tree, two least frequent symbols can be deepest siblings.</td><td><code>O(n log n)</code></td><td><code>O(n)</code></td></tr></tbody></table>
+
+          <h3>Minimum Spanning Tree</h3>
+          <table>
+            <thead><tr><th>Algorithm</th><th>Choice</th><th>Best Data Structure</th><th>Time</th></tr></thead>
+            <tbody>
+              <tr><td>Kruskal</td><td>Add smallest edge that does not form cycle.</td><td>Sorting + DSU</td><td><code>O(E log E)</code></td></tr>
+              <tr><td>Prim</td><td>Grow tree by cheapest edge leaving current tree.</td><td>Min-priority queue</td><td><code>O(E log V)</code></td></tr>
+            </tbody>
+          </table>
+          <details><summary>Show C Kruskal with DSU</summary><div class="details-body">
+<pre><code class="language-c">#include &lt;stdlib.h&gt;
+
+typedef struct {
+    int u, v, w;
+} Edge;
+
+int findParent(int parent[], int x) {
+    if (parent[x] == x) return x;
+    parent[x] = findParent(parent, parent[x]);
+    return parent[x];
+}
+
+int unite(int parent[], int rank[], int a, int b) {
+    a = findParent(parent, a);
+    b = findParent(parent, b);
+    if (a == b) return 0;
+    if (rank[a] &lt; rank[b]) {
+        int t = a; a = b; b = t;
+    }
+    parent[b] = a;
+    if (rank[a] == rank[b]) rank[a]++;
+    return 1;
+}
+
+int edgeCompare(const void *p, const void *q) {
+    return ((Edge *)p)-&gt;w - ((Edge *)q)-&gt;w;
+}
+
+int kruskal(int vertices, Edge edges[], int edgeCount) {
+    qsort(edges, edgeCount, sizeof(Edge), edgeCompare);
+    int parent[100], rank[100] = {0};
+    for (int i = 0; i &lt; vertices; i++) parent[i] = i;
+
+    int cost = 0;
+    for (int i = 0; i &lt; edgeCount; i++) {
+        if (unite(parent, rank, edges[i].u, edges[i].v)) {
+            cost += edges[i].w;
+        }
+    }
+    return cost;
+}</code></pre>
+          </div></details>
+
+          <h3>Dijkstra's Algorithm</h3>
+          <p>Dijkstra computes shortest paths from one source in graphs with non-negative edge weights.</p>
+          <table><thead><tr><th>Requirement</th><th>Time</th><th>Space</th><th>Fails When</th></tr></thead><tbody><tr><td>No negative edges</td><td><code>O((V+E) log V)</code> with priority queue</td><td><code>O(V+E)</code></td><td>Negative edge can invalidate finalized distances.</td></tr></tbody></table>
+
+          <h3>Practice Questions with Solutions</h3>
+          <div class="question-box">
+            <span class="box-label">Question 1:</span>
+            <p>For items <code>(value, weight) = (60,10), (100,20), (120,30)</code> and capacity <code>50</code>, find the optimal fractional knapsack value.</p>
+            <p><strong>Solution:</strong> Ratios are <code>6, 5, 4</code>. Take first two fully: value <code>160</code>, weight <code>30</code>. Capacity left <code>20</code>, take <code>20/30</code> of third item: value <code>80</code>. Total <code>240</code>.</p>
+          </div>
+          <div class="question-box">
+            <span class="box-label">Question 2:</span>
+            <p>Why does Dijkstra fail with negative edge weights?</p>
+            <p><strong>Solution:</strong> Dijkstra finalizes the nearest unvisited vertex assuming no later path can reduce it. A negative edge discovered later can reduce a finalized distance, breaking the greedy correctness argument.</p>
+          </div>
+        </section>
+
+        <section id="topic-4" class="topic">
+          <div class="topic-brand"><div class="topic-brand-left"><div class="logo" role="img" aria-label="Diverse Loopers logo"></div><div><p class="topic-kicker">Diverse Loopers Crash Course Notes</p><p class="topic-note-title">Topic 4 revision sheet</p></div></div></div>
+          <h2>Topic 4: Dynamic Programming</h2>
+          <p class="lead">Dynamic programming solves problems with overlapping subproblems and optimal substructure by storing subproblem answers.</p>
+          <table><thead><tr><th>Memoization</th><th>Tabulation</th></tr></thead><tbody><tr><td>Top-down recursion plus cache.</td><td>Bottom-up table filling.</td></tr><tr><td>Computes only reached states.</td><td>Often easier to optimize space and order.</td></tr></tbody></table>
+
+          <h3>0/1 Knapsack</h3>
+          <p>Each item is either taken fully or skipped. State <code>dp[i][w]</code> = best value using first <code>i</code> items and capacity <code>w</code>.</p>
+          <div class="formula-box"><span class="box-label">Transition:</span><p>If <code>wt[i-1] <= w</code>, then <code>dp[i][w]=max(dp[i-1][w], val[i-1]+dp[i-1][w-wt[i-1]])</code>; otherwise <code>dp[i][w]=dp[i-1][w]</code>.</p></div>
+          <table><thead><tr><th>Problem</th><th>Time</th><th>Space</th></tr></thead><tbody><tr><td>0/1 Knapsack</td><td><code>O(nW)</code></td><td><code>O(nW)</code>, optimized to <code>O(W)</code></td></tr></tbody></table>
+          <details open><summary>Small DP table example</summary><div class="details-body">
+            <p>Items: weights <code>[1,3,4]</code>, values <code>[15,20,30]</code>, capacity <code>4</code>.</p>
+            <table class="dp-table"><tbody><tr><th>i \ W</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr><tr><th>0</th><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><th>1</th><td>0</td><td>15</td><td>15</td><td>15</td><td>15</td></tr><tr><th>2</th><td>0</td><td>15</td><td>15</td><td>20</td><td>35</td></tr><tr><th>3</th><td>0</td><td>15</td><td>15</td><td>20</td><td>35</td></tr></tbody></table>
+          </div></details>
+          <details><summary>Show C 0/1 Knapsack</summary><div class="details-body">
+<pre><code class="language-c">int max(int a, int b) {
+    return a &gt; b ? a : b;
+}
+
+int knapsack(int wt[], int val[], int n, int W) {
+    int dp[101][1001];
+
+    for (int i = 0; i &lt;= n; i++) {
+        for (int w = 0; w &lt;= W; w++) {
+            if (i == 0 || w == 0) {
+                dp[i][w] = 0;
+            } else if (wt[i - 1] &lt;= w) {
+                dp[i][w] = max(dp[i - 1][w],
+                               val[i - 1] + dp[i - 1][w - wt[i - 1]]);
+            } else {
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+    return dp[n][W];
+}</code></pre>
+          </div></details>
+
+          <h3>Longest Common Subsequence</h3>
+          <p><code>LCS(i,j)</code> is the longest subsequence common to prefixes <code>X[0..i-1]</code> and <code>Y[0..j-1]</code>.</p>
+          <div class="formula-box"><p>If characters match: <code>dp[i][j]=1+dp[i-1][j-1]</code>. Else: <code>dp[i][j]=max(dp[i-1][j], dp[i][j-1])</code>.</p></div>
+          <table><tbody><tr><th>Time</th><td><code>O(mn)</code></td><th>Space</th><td><code>O(mn)</code>, reducible to <code>O(min(m,n))</code> for length only.</td></tr></tbody></table>
+
+          <h3>Matrix Chain Multiplication</h3>
+          <p>Given matrix dimensions, choose parenthesization minimizing scalar multiplications.</p>
+          <div class="formula-box"><p><code>dp[i][j] = min over k in [i,j-1] of dp[i][k] + dp[k+1][j] + p[i-1]*p[k]*p[j]</code>.</p></div>
+          <table><tbody><tr><th>Time</th><td><code>O(n^3)</code></td><th>Space</th><td><code>O(n^2)</code></td></tr></tbody></table>
+
+          <h3>Bellman-Ford</h3>
+          <p>Bellman-Ford computes single-source shortest paths with negative edges and detects negative cycles reachable from the source.</p>
+          <table><thead><tr><th>Relaxations</th><th>Negative Cycle Check</th><th>Time</th><th>Space</th></tr></thead><tbody><tr><td>Relax all edges <code>V-1</code> times.</td><td>One more relaxation indicates a cycle.</td><td><code>O(VE)</code></td><td><code>O(V)</code></td></tr></tbody></table>
+          <details><summary>Show C Bellman-Ford</summary><div class="details-body">
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+#define INF 1000000000
+
+typedef struct {
+    int u, v, w;
+} Edge;
+
+int bellmanFord(int vertices, Edge edges[], int edgeCount, int source, int dist[]) {
+    for (int i = 0; i &lt; vertices; i++) dist[i] = INF;
+    dist[source] = 0;
+
+    for (int i = 1; i &lt;= vertices - 1; i++) {
+        for (int j = 0; j &lt; edgeCount; j++) {
+            int u = edges[j].u, v = edges[j].v, w = edges[j].w;
+            if (dist[u] != INF &amp;&amp; dist[u] + w &lt; dist[v]) {
+                dist[v] = dist[u] + w;
+            }
+        }
+    }
+
+    for (int j = 0; j &lt; edgeCount; j++) {
+        int u = edges[j].u, v = edges[j].v, w = edges[j].w;
+        if (dist[u] != INF &amp;&amp; dist[u] + w &lt; dist[v]) {
+            return 0; /* negative cycle found */
+        }
+    }
+    return 1;
+}</code></pre>
+          </div></details>
+
+          <h3>Practice Questions with Solutions</h3>
+          <div class="question-box">
+            <span class="box-label">Question 1:</span>
+            <p>For 0/1 knapsack with weights <code>[1,3,4]</code>, values <code>[15,20,30]</code>, and capacity <code>4</code>, what is the optimal value?</p>
+            <p><strong>Solution:</strong> Choose item 1 and item 2: total weight <code>1+3=4</code>, total value <code>15+20=35</code>. Item 3 alone gives <code>30</code>. Therefore the optimum is <code>35</code>.</p>
+          </div>
+          <div class="question-box">
+            <span class="box-label">Question 2:</span>
+            <p>Why is LCS a DP problem?</p>
+            <p><strong>Solution:</strong> It has optimal substructure because the answer for prefixes depends on smaller prefixes. It has overlapping subproblems because the same prefix pairs are reached repeatedly in recursion. Hence storing <code>dp[i][j]</code> avoids recomputation.</p>
+          </div>
+        </section>
+
+        <section id="topic-5" class="topic">
+          <div class="topic-brand"><div class="topic-brand-left"><div class="logo" role="img" aria-label="Diverse Loopers logo"></div><div><p class="topic-kicker">Diverse Loopers Crash Course Notes</p><p class="topic-note-title">Topic 5 revision sheet</p></div></div></div>
+          <h2>Topic 5: Backtracking &amp; Branch and Bound</h2>
+          <p class="lead">Backtracking explores a decision tree depth-first and abandons partial solutions that violate constraints. Branch and Bound also prunes using bounds on the best possible objective value.</p>
+          <table><thead><tr><th>Backtracking</th><th>Branch and Bound</th></tr></thead><tbody><tr><td>Mostly constraint satisfaction: find feasible arrangements.</td><td>Mostly optimization: find best-cost solution.</td></tr><tr><td>Prunes invalid partial states.</td><td>Prunes states whose bound cannot beat current best.</td></tr></tbody></table>
+
+          <h3>N-Queens</h3>
+          <p>Place <code>N</code> queens so no two attack each other. Place one queen per row and test columns and diagonals.</p>
+          <table><tbody><tr><th>Worst Time</th><td><code>O(N!)</code> with row-wise placement</td><th>Space</th><td><code>O(N)</code> recursion plus board/output</td></tr></tbody></table>
+          <details><summary>Show C N-Queens</summary><div class="details-body">
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int board[20];
+
+int isSafe(int row, int col) {
+    for (int prev = 0; prev &lt; row; prev++) {
+        int oldCol = board[prev];
+        if (oldCol == col) return 0;
+        if (oldCol - prev == col - row) return 0;
+        if (oldCol + prev == col + row) return 0;
+    }
+    return 1;
+}
+
+void printSolution(int n) {
+    for (int i = 0; i &lt; n; i++) {
+        for (int j = 0; j &lt; n; j++) {
+            printf(board[i] == j ? "Q " : ". ");
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void solveNQueens(int row, int n) {
+    if (row == n) {
+        printSolution(n);
+        return;
+    }
+    for (int col = 0; col &lt; n; col++) {
+        if (isSafe(row, col)) {
+            board[row] = col;
+            solveNQueens(row + 1, n);
+        }
+    }
+}</code></pre>
+          </div></details>
+
+          <h3>Graph Coloring</h3>
+          <p>Assign at most <code>m</code> colors to vertices so adjacent vertices have different colors. Backtracking tries colors for each vertex and rejects conflicts.</p>
+          <table><tbody><tr><th>Worst Time</th><td><code>O(m^V)</code></td><th>Space</th><td><code>O(V)</code></td></tr></tbody></table>
+
+          <h3>Hamiltonian Cycle</h3>
+          <p>A Hamiltonian cycle visits every vertex exactly once and returns to the start. Backtracking builds a path and checks adjacency plus no repetition.</p>
+          <table><tbody><tr><th>Worst Time</th><td><code>O(V!)</code></td><th>Space</th><td><code>O(V)</code></td></tr></tbody></table>
+
+          <h3>Travelling Salesperson Problem</h3>
+          <p>TSP asks for the minimum-cost tour visiting every city exactly once and returning home. Exact TSP is exponential; branch and bound prunes tours using lower bounds.</p>
+          <table><thead><tr><th>Method</th><th>Idea</th><th>Time</th></tr></thead><tbody><tr><td>Brute force</td><td>Try all tours.</td><td><code>O(n!)</code></td></tr><tr><td>DP Held-Karp</td><td>State by subset and last city.</td><td><code>O(n^2 2^n)</code></td></tr><tr><td>Branch and Bound</td><td>Explore promising tours first; prune with lower bound.</td><td>Exponential worst case, faster in practice.</td></tr></tbody></table>
+
+          <h3>Practice Questions with Solutions</h3>
+          <div class="question-box">
+            <span class="box-label">Question 1:</span>
+            <p>In 4-Queens, why can we place at most one queen in each row?</p>
+            <p><strong>Solution:</strong> Queens attack horizontally. If two queens are in the same row, they attack each other immediately. Backtracking therefore fixes one row at a time and only chooses a column for that row.</p>
+          </div>
+          <div class="question-box">
+            <span class="box-label">Question 2:</span>
+            <p>What is the key difference between pruning in backtracking and branch and bound?</p>
+            <p><strong>Solution:</strong> Backtracking prunes infeasible partial solutions, such as a graph coloring conflict. Branch and bound prunes partial solutions whose best possible completion cannot improve the current best objective value.</p>
+          </div>
+        </section>
+
+        <section id="topic-6" class="topic">
+          <div class="topic-brand"><div class="topic-brand-left"><div class="logo" role="img" aria-label="Diverse Loopers logo"></div><div><p class="topic-kicker">Diverse Loopers Crash Course Notes</p><p class="topic-note-title">Topic 6 revision sheet</p></div></div></div>
+          <h2>Topic 6: Complexity Theory</h2>
+          <p class="lead">Complexity theory classifies problems by the resources required to solve or verify them, usually in terms of polynomial versus exponential growth.</p>
+
+          <table>
+            <thead><tr><th>Class</th><th>Meaning</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td><code>P</code></td><td>Decision problems solvable in polynomial time by a deterministic algorithm.</td><td>Graph connectivity, shortest path with non-negative edges.</td></tr>
+              <tr><td><code>NP</code></td><td>Decision problems whose yes-certificates can be verified in polynomial time.</td><td>Hamiltonian Cycle, SAT, Clique decision.</td></tr>
+              <tr><td><code>NP-Hard</code></td><td>At least as hard as every problem in NP; need not be in NP or even decidable.</td><td>Optimization TSP.</td></tr>
+              <tr><td><code>NP-Complete</code></td><td>Problems that are both in NP and NP-Hard.</td><td>SAT, 3-SAT, Hamiltonian Cycle decision, Clique decision.</td></tr>
+            </tbody>
+          </table>
+
+          <div class="diagram"><div class="flow-row"><div class="flow-box">Show problem in NP</div><div class="flow-arrow">-&gt;</div><div class="flow-box">Choose known NP-Complete problem</div><div class="flow-arrow">-&gt;</div><div class="flow-box">Polynomial reduction</div><div class="flow-arrow">-&gt;</div><div class="flow-box">Conclude NP-Complete</div></div></div>
+
+          <h3>Decision vs Optimization</h3>
+          <table><thead><tr><th>Optimization Version</th><th>Decision Version</th></tr></thead><tbody><tr><td>Find minimum TSP tour cost.</td><td>Is there a tour with cost at most <code>K</code>?</td></tr><tr><td>Find largest clique.</td><td>Is there a clique of size at least <code>K</code>?</td></tr></tbody></table>
+
+          <h3>P vs NP</h3>
+          <p><code>P</code> is contained in <code>NP</code> because if a problem can be solved quickly, a proposed solution can also be verified quickly. The open question is whether every quickly verifiable problem is also quickly solvable.</p>
+          <div class="warning"><strong>Current status:</strong> No proof is known for <code>P = NP</code> or <code>P != NP</code>. Most researchers believe <code>P != NP</code>.</div>
+
+          <h3>High-Yield Complexity Summary</h3>
+          <table>
+            <thead><tr><th>Topic</th><th>Must Remember</th></tr></thead>
+            <tbody>
+              <tr><td>Reduction</td><td>If <code>A <=p B</code> and <code>A</code> is hard, then <code>B</code> is at least as hard as <code>A</code>.</td></tr>
+              <tr><td>NP-Hard proof</td><td>Reduce a known NP-Complete problem to the target problem.</td></tr>
+              <tr><td>NP-Complete proof</td><td>Show target is in NP and NP-Hard.</td></tr>
+              <tr><td>Approximation</td><td>Used when exact optimization is too expensive, especially for NP-Hard problems.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Practice Questions with Solutions</h3>
+          <div class="question-box">
+            <span class="box-label">Question 1:</span>
+            <p>Is every problem in <code>P</code> also in <code>NP</code>?</p>
+            <p><strong>Solution:</strong> Yes. If a decision problem can be solved in polynomial time, then a proposed answer can also be verified in polynomial time by simply solving the problem and comparing the result.</p>
+          </div>
+          <div class="question-box">
+            <span class="box-label">Question 2:</span>
+            <p>How do we prove that a problem <code>X</code> is NP-Complete?</p>
+            <p><strong>Solution:</strong> First show <code>X</code> is in <code>NP</code>, meaning a yes-certificate is verifiable in polynomial time. Then choose a known NP-Complete problem <code>Y</code> and give a polynomial-time reduction <code>Y <=p X</code>. This proves <code>X</code> is NP-Hard and therefore NP-Complete.</p>
+          </div>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>
+      Diverse Loopers Crash Course Notes - DAA Crash Course. Curriculum order checked against GeeksforGeeks DAA and Analysis of Algorithms pages on 2026-05-01:
+      <a href="https://www.geeksforgeeks.org/dsa/design-and-analysis-of-algorithm-tutorial/">DAA Tutorial</a>,
+      <a href="https://www.geeksforgeeks.org/dsa/analysis-of-algorithms/">Analysis of Algorithms</a>,
+      <a href="https://www.geeksforgeeks.org/dsa/greedy-algorithms/">Greedy Algorithms</a>.
+    </p>
+  </footer>
+</body>
+</html>
